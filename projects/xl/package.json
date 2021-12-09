@@ -1,6 +1,6 @@
 {
   "name": "@stypw/xl",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/stypw"
   },

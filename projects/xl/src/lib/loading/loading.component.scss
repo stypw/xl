@@ -19,9 +19,9 @@
     &.show{
         opacity: 1;
         pointer-events: none;
-    }
-    &.mask{
-        pointer-events: all;
+        &.mask{
+            pointer-events: all;
+        }
     }
 }
 
