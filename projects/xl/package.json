@@ -1,0 +1,14 @@
+{
+  "name": "@stypw/xl",
+  "version": "0.0.7",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/stypw"
+  },
+  "peerDependencies": {
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

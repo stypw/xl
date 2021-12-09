@@ -1,0 +1,28 @@
+<div class="resize-box box-panel">
+    <div draggable="false" ondragstart="return false;" class="drag-header" (mousedown)="mouseDownInHeader($event);">
+        <ng-content select="[header]"></ng-content>
+    </div>
+    <div draggable="false" ondragstart="return false;" class="panel-content">
+        <div draggable="false" ondragstart="return false;" class="content-box">
+            <ng-content select="[content]"></ng-content>
+        </div>
+    </div>
+
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-bar stick-top"
+        (mousedown)="mouseDownInTop($event);"></div>
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-bar stick-bottom"
+        (mousedown)="mouseDownInBottom($event);"></div>
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-bar stick-left"
+        (mousedown)="mouseDownInLeft($event);"></div>
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-bar stick-right"
+        (mousedown)="mouseDownInRight($event);"></div>
+
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-point stick-top-left"
+        (mousedown)="mouseDownInTopLeft($event);"></div>
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-point stick-top-right"
+        (mousedown)="mouseDownInTopRight($event);"></div>
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-point stick-bottom-left"
+        (mousedown)="mouseDownInBottomLeft($event);"></div>
+    <div draggable="false" ondragstart="return false;" class="resize-stick stick-point stick-bottom-right"
+        (mousedown)="mouseDownInBottomRight($event);"></div>
+</div>

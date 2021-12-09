@@ -1,0 +1,76 @@
+:host{
+    position: fixed;
+    top:0rem;
+    bottom:0rem;
+    left:0rem;
+    right:0rem;
+    z-index: var(--ld-lv,99);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    pointer-events: none;
+    display: flex;
+    opacity: 0;
+    transition: opacity 300ms;
+    &.absolute{
+        position: absolute;
+    }
+    &.show{
+        opacity: 1;
+        pointer-events: none;
+    }
+    &.mask{
+        pointer-events: all;
+    }
+}
+
+
+@keyframes loadanimal{
+  from{
+      opacity: 1;
+      transform:scale(1.1);
+  }
+  to{
+      opacity: 0.1;
+      transform:scale(1);
+  }
+}
+
+.loading-box{
+  height: 3rem;
+  width:3rem;
+  background-color:transparent;
+  position: relative;
+  border-radius: 50%;
+  .loading-item{
+      position: absolute;
+      left:0rem;
+      right:0rem;
+      top:0rem;
+      bottom:0rem;
+      .loading-icon{
+          opacity: 0.1;
+          width:16px;
+          height:4px;
+          border-radius: 0px;
+          animation: loadanimal 1s ease infinite;
+      }
+  }
+
+
+
+  $rotateStep:30deg;
+  @for $i from 1 through 12{
+      .loading-item:nth-child(#{$i}){
+          transform:rotateZ($i*$rotateStep);
+          .loading-icon{
+              // background-color:rgb(15+$i*20, 245-$i*10, 115+$i*5);
+              background-color:rgb(15, 45, 115+$i*5);
+              animation-delay: $i*0.083s;
+          }
+      }
+  }
+
+
+}

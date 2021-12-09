@@ -1,0 +1,126 @@
+:host{
+    
+    top:0px;
+    left: 0px;
+    width: var(--width,300px);
+    height: var(--height,200px);
+    display:flex;
+    position: absolute;
+    box-sizing: border-box;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms;
+    &.show{
+        opacity: 1;
+        pointer-events: all;
+    }
+
+   
+    .box-panel{
+        box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding:0px;
+        border: 1px solid rgba(64, 64, 64, 0.2);
+        overflow: hidden;
+    }
+
+    .resize-box{
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        width:100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .drag-header{
+        cursor:move;
+        width:100%;
+        height: auto;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+    .panel-content{
+        flex-grow: 1;
+        flex-shrink: 1;
+        display: block;
+        overflow: hidden;
+        .content-box{
+            width:100%;
+            height: 100%;
+            overflow: auto;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+    }
+
+    
+
+    .resize-stick{
+        position: absolute;
+        background-color: transparent;
+        &.stick-bar{
+            z-index: 10;
+        }
+        &.stick-top{
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 10px;
+            cursor:ns-resize;
+        }
+        &.stick-bottom{
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            height: 10px;
+            cursor:ns-resize;
+        }
+        &.stick-left{
+            left: 0px;
+            top: 0px;
+            bottom: 0px;
+            width: 10px;
+            cursor: ew-resize;
+        }
+        &.stick-right{
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            width: 10px;
+            cursor: ew-resize;
+        }
+
+        &.stick-point{
+            z-index: 11;
+        }
+        &.stick-top-left{
+            top: 0px;
+            left: 0px;
+            width:10px;
+            height: 10px;
+            cursor:se-resize;
+        }
+        &.stick-top-right{
+            top: 0px;
+            right: 0px;
+            width:10px;
+            height: 10px;
+            cursor:ne-resize;
+        }
+        &.stick-bottom-left{
+            bottom: 0px;
+            left: 0px;
+            width:10px;
+            height: 10px;
+            cursor:sw-resize;
+        }
+        &.stick-bottom-right{
+            bottom: 0px;
+            right: 0px;
+            width:10px;
+            height: 10px;
+            cursor:se-resize;
+        }
+    }
+
+}
