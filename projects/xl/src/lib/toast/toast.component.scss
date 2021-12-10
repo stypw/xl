@@ -1,0 +1,32 @@
+
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    @keyframes toastAnimal{
+        0%{
+            opacity: 0;
+        }
+        5%{
+            opacity: 1;
+        }
+        75%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+        }
+    }
+    .toast-item{
+            animation: toastAnimal 2s linear 1;
+            padding:8px;
+            background-color:rgba(5,5,5,0.6);
+            color:white;
+            border-radius: 4px;
+    }
+    
+}
+  
+  

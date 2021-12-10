@@ -1,0 +1,27 @@
+<ng-template #itemView let-item>
+    <div (click)="onItemClick(item);" class="item-panel">
+        <div class="item-header">
+            <div class="item-title">{{item.title}}</div>
+            <div (click)="onItemClose(item,$event);" class="item-close" xlSvg="close"></div>
+        </div>
+        <div class="item-content">
+            {{item.content}}
+        </div>
+        <div class="item-time">
+            {{item.time | date:"yyyy/MM/dd HH:mm:ss"}}
+        </div>
+    </div>
+
+</ng-template>
+
+
+<div [class.show]="show" class="notice-list-panel">
+    <ng-container *ngFor="let item of list;">
+        <ng-container *ngTemplateOutlet="itemView;context:{'$implicit':item}"></ng-container>
+    </ng-container>
+</div>
+<div [class.show]="isShowLast && last && !show" class="notice-last-panel">
+    <ng-container *ngIf="last">
+        <ng-container *ngTemplateOutlet="itemView;context:{'$implicit':last}"></ng-container>
+    </ng-container>
+</div>

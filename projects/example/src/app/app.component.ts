@@ -14,6 +14,9 @@ export class AppComponent {
   menus: Menu[] = [
     { url: "start", text: "开始" },
     { url: "wnd", text: "弹窗" },
-    { url: "loading", text: "loading" }
+    { url: "loading", text: "loading" },
+    { url: "toast", text: "toast" },
+    { url: "notice", text: "notice" },
+    { url: "svg", text: "svg" }
   ]
 }

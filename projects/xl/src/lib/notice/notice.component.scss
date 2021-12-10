@@ -1,0 +1,85 @@
+:host{
+    pointer-events: none;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+   
+    border-radius: 2px;
+    .notice-list-panel{
+        padding:10px;
+        position: absolute;
+        pointer-events: all;
+        overflow: auto;
+        width:100%;
+        top:0px;
+        bottom:0px;
+        min-height: 100px;
+        right: -100%;
+        transition: right 1000ms;
+        background-color: rgba(0,0,0,0.5);
+        color:white;
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+        &.show{
+            right: 0%;
+        }
+    }
+    .notice-last-panel{
+        position: absolute;
+        pointer-events: all;
+        width:100%;
+        height: auto;
+        bottom:0px;
+        min-height: 100px;
+        right: -100%;
+        border-radius: 2px;
+        transition: right 1000ms;
+        background-color: rgba(0,0,0,0.7);
+        color:white;
+        &.show{
+            right: 0%;
+        }
+    }
+
+    .item-panel{
+        padding:10px;
+        width:100%;
+        flex-grow: 0;
+        flex-shrink: 0;
+        background-color: rgba(0,0,0,0.6);
+        .item-header{
+            display: flex;
+            flex-direction: row;
+            .item-title{
+                flex-shrink: 1;
+                flex-grow: 1;
+                font-size: 16px;
+            }
+            .item-close{
+                flex-shrink: 0;
+                flex-grow: 0;
+                width:20px;
+                height: 20px;
+                --color:white;
+                cursor: pointer;
+            }
+        }
+        .item-content{
+            padding:10px;
+            width: 100%;
+            font-size: 14px;
+            max-height: 80px;
+            white-space:nowrap;
+            overflow: hidden;
+            line-clamp: 3;
+            display: block;
+            color:#ccc;
+            text-overflow: ellipsis;
+        }
+        .item-time{
+            font-size: 12px;
+            color:#aaa;
+        }
+    }
+}

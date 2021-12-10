@@ -1,0 +1,6 @@
+<ng-container *ngFor="let content of contents">
+    <div style="height:10px;"></div>
+    <div (animationend)="toastEnd(content);" (webkitAnimationEnd)="toastEnd(content);" class="toast-item">
+        {{content.text}}
+    </div>
+</ng-container>

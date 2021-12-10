@@ -1,0 +1,10 @@
+<div class="wd-full ht-full fl-hor">
+    <div class="ht-full fl-zoom-1">
+        <button (click)="addNotice();" >新消息</button>
+        <button (click)="showNotice();" >显示消息面板 {{notice.count}}</button>
+        <button (click)="hideNotice();" >关闭消息面板</button>
+    </div>
+    <div class="ht-full fl-zoom-0">
+        <div [xlNotice]="notice" class="ht-full" style="width: 250px;"></div>
+    </div>
+</div>

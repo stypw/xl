@@ -1,5 +1,61 @@
 import { Component, ElementRef, HostBinding, Input } from "@angular/core";
 
+type Call = () => void;
+type StringCall = (text?: string) => void;
+export interface IXlLoading {
+  show(text?: string): void;
+  hide(): void;
+}
+class XlLoading implements IXlLoading {
+  showHandle: StringCall | null = null;
+  hideHandle: Call | null = null;
+  show(text?: string): void {
+    let handle = this.showHandle;
+    handle && handle(text);
+  }
+  hide(): void {
+    let handle = this.hideHandle;
+    handle && handle();
+  }
+}
+
+export namespace IXlLoading {
+  export function create(): IXlLoading {
+    return new XlLoading();
+  }
+}
+
+let loading: XlLoading | null = null;
+export function loadingRegister(ld: IXlLoading) {
+  if (ld instanceof XlLoading) {
+    loading = ld;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function loadingUnregister() {
+  loading = null;
+}
+
+export function showLoading() {
+  if (loading) {
+    loading.show();
+  } else {
+    throw `Loading not registered,call loadingRegister to register!`;
+  }
+}
+
+export function hideLoading() {
+  if (loading) {
+    loading.hide();
+  } else {
+    throw `Loading not registered,call loadingRegister to register!`;
+  }
+}
+
+
 
 @Component({
   selector: 'div[xlLoading]',
@@ -7,23 +63,42 @@ import { Component, ElementRef, HostBinding, Input } from "@angular/core";
   styleUrls: ['./loading.component.scss']
 })
 export class XlLoadingComponent {
+  text: string | null = null;
 
-  private _absolute: boolean = false;
-  @HostBinding("class.absolute")
   @Input()
-  public get absolute() { return this._absolute; }
-  public set absolute(s: boolean | string | undefined | null) {
+  set xlLoading(handle: IXlLoading | string | null | undefined) {
+    if (handle instanceof XlLoading) {
+      handle.showHandle = this.doShow.bind(this);
+      handle.hideHandle = this.doHide.bind(this);
+    }
+  }
+
+  doShow(text?: string) {
+    if (text != undefined) {
+      this.text = text;
+    }
+    this._show = true;
+  }
+  doHide() {
+    this._show = false;
+  }
+
+  private _fullScreen: boolean = false;
+  @HostBinding("class.full-screen")
+  @Input()
+  public get fullScreen() { return this._fullScreen; }
+  public set fullScreen(s: boolean | string | undefined | null) {
     if (typeof s == "boolean") {
-      this._absolute = s;
+      this._fullScreen = s;
       return;
     }
     if (typeof s == "string") {
       if (s == "") {
-        this._absolute = true;
+        this._fullScreen = true;
         return;
       }
       let v = s.toLowerCase();
-      this._absolute = v == "true";
+      this._fullScreen = v == "true";
     }
 
   }

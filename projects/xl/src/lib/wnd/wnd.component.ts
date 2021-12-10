@@ -1,6 +1,6 @@
 
 import { Component, Input, Optional, Self, ElementRef, HostListener, HostBinding } from "@angular/core";
-import { XlWndlimitCompoent } from "./wnd-limit/wnd-limit.compoent";
+import { XlWndLimitCompoent } from "./wnd-limit/wnd-limit.compoent";
 
 export type MouseEventHandle = ((evt: MouseEvent) => void) | null;
 
@@ -347,7 +347,7 @@ export class XlWndComponent {
 
   constructor(
     @Self() private resizeBorder: ElementRef,
-    @Optional() private panel: XlWndlimitCompoent,
+    @Optional() private panel: XlWndLimitCompoent,
   ) { }
 
 }

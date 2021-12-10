@@ -1,14 +1,14 @@
 import { Component, ElementRef, HostListener, Optional, Self } from "@angular/core";
 
 @Component({
-    selector: "[xlWndlimit]",
+    selector: "[xlWndLimit]",
     templateUrl: "./wnd-limit.compoent.html",
     styleUrls: ["./wnd-limit.compoent.scss"],
     host:{
         draggable:"false" 
     }
 })
-export class XlWndlimitCompoent {
+export class XlWndLimitCompoent {
     @HostListener("dragstart")
     ondragstart(){
         return false;
