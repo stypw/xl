@@ -1,0 +1,11 @@
+<div [xlConversion]="conversion" style="width: 400px;height:350px;">
+    <div *ngFor="let txt of texts;let od =odd;let idx = index;" xlConversionItem [style.background-color]="od?'#ff0':'#0ff'"  >
+        txt:{{txt}},idx:{{idx}}
+    </div>
+</div>
+
+<button (click)="toPrev();">Prev</button>
+<button (click)="toNext();">Next</button>
+
+<input [(ngModel)]="idx" />
+<button (click)="jump();" >跳转</button>

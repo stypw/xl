@@ -1,10 +1,10 @@
 <div class="resize-box box-panel">
     <div draggable="false" ondragstart="return false;" class="drag-header" (mousedown)="mouseDownInHeader($event);">
-        <ng-content select="[header]"></ng-content>
+        <ng-content select="[xlWndHeader]"></ng-content>
     </div>
     <div draggable="false" ondragstart="return false;" class="panel-content">
         <div draggable="false" ondragstart="return false;" class="content-box">
-            <ng-content select="[content]"></ng-content>
+            <ng-content select="[xlWndContent]"></ng-content>
         </div>
     </div>
 

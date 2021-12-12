@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { svgGet } from "./svg-pathes";
 @Component({
-    selector: "div[xlSvg]",
+    selector: "xlSvg,[xlSvg]",
     templateUrl: "./svg.component.html",
     styleUrls: ["./svg.component.scss"]
 })

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { IXlLoading } from "@stypw/xl";
 
 @Component({
     selector: "div[router-loading]",
@@ -6,8 +7,8 @@ import { Component } from "@angular/core";
     styleUrls: ["./loading.component.scss"]
 })
 export class LoadingComponent {
-
+    loading:IXlLoading = IXlLoading.create();
     doTest(){
-        console.log("hello World!");
+        this.loading.show("Hello World");
     }
  }

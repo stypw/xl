@@ -8,6 +8,11 @@ export * from "./loading";
 export * from "./svg";
 export * from "./toast";
 export * from "./notice";
+export * from "./form";
+export * from "./conversion";
+
+import { XlConversionModule } from "./conversion";
+import { XlFormModule } from "./form";
 import { XlNoticeModule } from "./notice";
 import { XlToastModule } from "./toast";
 import { XlSvgModule } from "./svg";
@@ -17,12 +22,14 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlConversionModule,
     XlNoticeModule,
     XlToastModule,
     XlSvgModule,
     XlBindingModule,
     XlWndModule,
-    XlLoadingModule
+    XlLoadingModule,
+    XlFormModule
 ];
 
 @NgModule({

@@ -1,6 +1,4 @@
 <div class="wd-full ht-full" style="position: relative;">
-    <div xlLoading show mask style="position: absolute;left:0px;top:0px;right:0px;bottom:0px;" >
-        <div>正在加载...</div>
-    </div>
+    <div [xlLoading]="loading" mask style="position: absolute;left:0px;top:0px;right:0px;bottom:0px;" > </div>
     <button (click)="doTest();" >HelloWorld</button>
 </div>

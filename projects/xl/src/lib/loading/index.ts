@@ -1,2 +1,2 @@
-export { XlLoadingComponent } from "./loading.component";
-export { XlLoadingModule } from "./loading.module";
+export * from "./loading.component";
+export * from "./loading.module";

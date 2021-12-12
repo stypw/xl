@@ -77,7 +77,7 @@ export function showNotice(item: XlNoticeItem) {
 
 
 @Component({
-    selector: "div[xlNotice]",
+    selector: "xlNotice,[xlNotice]",
     templateUrl: "./notice.component.html",
     styleUrls: ["./notice.component.scss"]
 })
@@ -125,7 +125,7 @@ export class XlNoticeComponent {
         let click = item.click;
         click && click();
     }
-    async onItemClose(item: XlNoticeItem,evt:MouseEvent) {
+    async onItemClose(item: XlNoticeItem, evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
         evt.stopImmediatePropagation();

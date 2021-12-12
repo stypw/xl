@@ -14,9 +14,19 @@ export class AppComponent {
   menus: Menu[] = [
     { url: "start", text: "开始" },
     { url: "wnd", text: "弹窗" },
-    { url: "loading", text: "loading" },
-    { url: "toast", text: "toast" },
-    { url: "notice", text: "notice" },
-    { url: "svg", text: "svg" }
+    { url: "tab", text: "选项卡" },
+    { url: "carousel", text: "轮播" },
+    { url: "conversion", text: "内容切换" },
+    { url: "loading", text: "加载" },
+    { url: "toast", text: "提示" },
+    { url: "notice", text: "通知" },
+    { url: "form", text: "表单" },
+    { url: "tree", text: "树" },
+    { url: "process", text: "进度条" },
+    { url: "slider", text: "滑块" },
+    { url: "table", text: "表格" },
+    { url: "page", text: "分页" },
+    { url: "datetimepicker", text: "时间选择器" },
+    { url: "colorpicker", text: "颜色选择器" }
   ]
 }

@@ -1,5 +1,6 @@
 
 import { Component, Input, Optional, Self, ElementRef, HostListener, HostBinding } from "@angular/core";
+import { IGlobalListener } from "../global-listen";
 import { XlWndLimitCompoent } from "./wnd-limit/wnd-limit.compoent";
 
 export type MouseEventHandle = ((evt: MouseEvent) => void) | null;
@@ -14,7 +15,7 @@ export type SetRect = {
 };
 
 @Component({
-  selector: "[xlWnd]",
+  selector: "xlWnd,[xlWnd]",
   templateUrl: "./wnd.component.html",
   styleUrls: ["./wnd.component.scss"],
   host: {
@@ -24,6 +25,8 @@ export type SetRect = {
 export class XlWndComponent {
   listenHandle: MouseEventHandle = null;
   unlistenHandle: MouseEventHandle = null;
+
+  listener: IGlobalListener = IGlobalListener.create();
 
   moveHandle: MouseEventHandle = null;
   mouseMoveInPanel(evt: MouseEvent) {
@@ -58,11 +61,7 @@ export class XlWndComponent {
 
   }
 
-  clearMove(evt: MouseEvent) {
-    this.moveHandle = null;
-  }
-
-  ngOnInit() {
+  startListen() {
     this.listenHandle = this.mouseMoveInPanel.bind(this);
     this.unlistenHandle = this.clearMove.bind(this);
 
@@ -71,22 +70,35 @@ export class XlWndComponent {
       this.panel.el?.nativeElement?.addEventListener("mouseleave", this.unlistenHandle);
       this.panel.el?.nativeElement?.addEventListener("mouseup", this.unlistenHandle);
     } else {
-      window.addEventListener("mousemove", this.listenHandle);
-      window.addEventListener("mouseleave", this.unlistenHandle);
-      window.addEventListener("mouseup", this.unlistenHandle);
+      this.listener.on("mousemove", this.listenHandle);
+      this.listener.on("mouseleave", this.unlistenHandle);
+      this.listener.on("mouseup", this.unlistenHandle);
     }
   }
-
-  ngOnDestroy() {
+  endListen() {
     if (this.panel) {
       this.listenHandle && this.panel.el?.nativeElement?.removeEventListener("mousemove", this.listenHandle);
       this.unlistenHandle && this.panel.el?.nativeElement?.removeEventListener("mouseleave", this.unlistenHandle);
       this.unlistenHandle && this.panel.el?.nativeElement?.removeEventListener("mouseup", this.unlistenHandle);
     } else {
-      this.listenHandle && window.removeEventListener("mousemove", this.listenHandle);
-      this.unlistenHandle && window.removeEventListener("mouseleave", this.unlistenHandle);
-      this.unlistenHandle && window.removeEventListener("mouseup", this.unlistenHandle);
+      this.listener.off("mousemove");
+      this.listener.off("mouseleave");
+      this.listener.off("mouseup");
     }
+
+    this.listenHandle = null;
+    this.unlistenHandle = null;
+    this.moveHandle = null;
+  }
+
+  clearMove(evt: MouseEvent) {
+    this.moveHandle = null;
+  }
+
+  ngOnInit() { }
+
+  ngOnDestroy() {
+    this.listener.destory();
   }
 
   doResize(rect: SetRect) {
@@ -158,6 +170,7 @@ export class XlWndComponent {
   }
 
   mouseDownInHeader(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const viewRect = view.getBoundingClientRect();
     const top = viewRect.top - this.panelTop;
@@ -176,6 +189,7 @@ export class XlWndComponent {
   }
 
   mouseDownInTop(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const height = view.clientHeight;
     const viewRect = view.getBoundingClientRect();
@@ -192,6 +206,7 @@ export class XlWndComponent {
     };
   }
   mouseDownInBottom(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const height = view.clientHeight;
     const self = this;
@@ -203,6 +218,7 @@ export class XlWndComponent {
     };
   }
   mouseDownInLeft(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const width = view.clientWidth;
     const viewRect = view.getBoundingClientRect();
@@ -219,6 +235,7 @@ export class XlWndComponent {
     };
   }
   mouseDownInRight(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const width = view.clientWidth;
     const self = this;
@@ -231,6 +248,7 @@ export class XlWndComponent {
   }
 
   mouseDownInTopLeft(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const height = view.clientHeight;
     const width = view.clientWidth;
@@ -252,6 +270,7 @@ export class XlWndComponent {
     };
   }
   mouseDownInTopRight(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const height = view.clientHeight;
     const width = view.clientWidth;
@@ -270,6 +289,7 @@ export class XlWndComponent {
     };
   }
   mouseDownInBottomLeft(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const width = view.clientWidth;
     const height = view.clientHeight;
@@ -287,6 +307,7 @@ export class XlWndComponent {
     };
   }
   mouseDownInBottomRight(start: MouseEvent) {
+    this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const height = view.clientHeight;
     const width = view.clientWidth;

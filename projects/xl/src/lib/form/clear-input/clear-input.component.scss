@@ -1,0 +1,61 @@
+$defaultHeight:30px;
+$defaultWidth:150px;
+$defaultBorder:1px solid #ccc;
+:host{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    border:var(--border,$defaultBorder);
+    border-radius: 4px;
+    height: var(--height,$defaultHeight);
+    width:var(--width,$defaultWidth);
+    padding:5px;
+    padding-right: 0px;
+    input{
+        border:none;
+        outline: none;
+        flex-grow: 1;
+        flex-shrink: 1;
+        &:focus{
+            outline: none;
+        }
+        min-width: 1px;
+        display: flex;
+    }
+    .svg-box{
+        width:var(--height,$defaultHeight);
+        height: var(--height,$defaultHeight);
+        flex-grow: 0;
+        flex-shrink: 0;
+        padding:6px;
+        
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        display: none;
+  
+        &.show{
+            display: flex;
+        }
+        [xlSvg]{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            width:100%;
+            height: 100%;
+            padding:2px;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            --color:white;
+            
+            &:hover{
+                background-color: rgba(0,0,0,0.2);
+            }
+        }
+    }
+    
+}

@@ -39,9 +39,9 @@ export function loadingUnregister() {
   loading = null;
 }
 
-export function showLoading() {
+export function showLoading(txt?:string) {
   if (loading) {
-    loading.show();
+    loading.show(txt);
   } else {
     throw `Loading not registered,call loadingRegister to register!`;
   }
@@ -58,7 +58,7 @@ export function hideLoading() {
 
 
 @Component({
-  selector: 'div[xlLoading]',
+  selector: 'xlLoading,[xlLoading]',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })

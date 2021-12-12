@@ -41,7 +41,7 @@ type ToastContent = {
     text: string;
 }
 @Component({
-    selector: "div[xlToast]",
+    selector: "xlToast,[xlToast]",
     templateUrl: './toast.component.html',
     styleUrls: ['./toast.component.scss']
 })
