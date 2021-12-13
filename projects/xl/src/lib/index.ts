@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+export * from "./types/types";
 export * from "./http"
 export * as tools from "./tools";
 export * as mysql from "./mysql"
@@ -10,7 +11,13 @@ export * from "./toast";
 export * from "./notice";
 export * from "./form";
 export * from "./conversion";
+export * from "./carousel";
+export * from "./toggle";
+export * from "./tab";
 
+import { XlTabModule } from "./tab";
+import { XlToggleModule } from "./toggle";
+import { XlCarouselModule } from "./carousel";
 import { XlConversionModule } from "./conversion";
 import { XlFormModule } from "./form";
 import { XlNoticeModule } from "./notice";
@@ -22,6 +29,9 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlTabModule,
+    XlToggleModule,
+    XlCarouselModule,
     XlConversionModule,
     XlNoticeModule,
     XlToastModule,

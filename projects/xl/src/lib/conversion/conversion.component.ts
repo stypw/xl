@@ -1,22 +1,38 @@
 import { Component, forwardRef, Input } from '@angular/core';
+import { GetNumber, SetNumber, SetValue } from '../types/types';
 import { IXlConversionInjection, IXlConversionBox } from "./define";
 
 export interface IXlConversion {
   toIndex(i: number): void;
+  get index(): number;
+  set index(v: number);
   toNext(loop?: boolean): void;
   toPrev(loop?: boolean): void;
 }
 
-type NumberCall = (i: number) => void;
-type BooleanCall = (b?: boolean) => void;
-
-
 type ConversionState = "NONE" | "RIGHT" | "LEFT";
 
 class XlConversion implements IXlConversion {
-  toIndexHandle: NumberCall | null = null;
-  toNextHandle: BooleanCall | null = null;
-  toPrevHandle: BooleanCall | null = null;
+  getIndexHandle: GetNumber | null = null;
+  setIndexHandle: SetNumber | null = null;
+
+  get index(): number {
+    let handle = this.getIndexHandle;
+    if (handle) {
+      return handle();
+    }
+    return -1;
+  }
+  set index(v: number) {
+    let handle = this.setIndexHandle;
+    if (handle) {
+      handle(v);
+    }
+  }
+
+  toIndexHandle:  SetNumber | null = null;
+  toNextHandle: SetValue<boolean | undefined> | null = null;
+  toPrevHandle: SetValue<boolean | undefined> | null = null;
   toIndex(i: number): void {
     let handle = this.toIndexHandle;
     handle && handle(i);
@@ -67,6 +83,10 @@ export class XlConversionComponent implements IXlConversionBox {
     this.right = right;
   }
 
+  getCurrent() {
+    return this.curr;
+  }
+
   getIndex() {
     let idx = this.count;
     this.count++;
@@ -96,10 +116,13 @@ export class XlConversionComponent implements IXlConversionBox {
       handle.toIndexHandle = this.toIndex.bind(this);
       handle.toNextHandle = this.toNext.bind(this);
       handle.toPrevHandle = this.toPrev.bind(this);
+      handle.getIndexHandle = this.getCurrent.bind(this);
+      handle.setIndexHandle = this.toIndex.bind(this);
     }
   }
 
   toIndex(idx: number) {
+
     if (this.curr == idx) {
       return;
     }

@@ -1,18 +1,18 @@
 import { Component, HostBinding, Input } from "@angular/core";
-import { sleep } from "../tools";
 
-export type Call = () => void;
-export type CallBoolean = () => boolean | Promise<boolean>;
+import { sleep } from "../tools";
+import { Call, GetNumber, GetValue, SetValue } from "../types/types";
+
+
 export type XlNoticeItem = {
     title: string;
     content: string;
     time: Date;
     click?: Call;
-    close?: CallBoolean;
+    close?: GetValue<boolean | Promise<boolean>>;
 }
 
-type AddCall = (item: XlNoticeItem) => void;
-type CountCall = () => number;
+
 export interface IXlNotice {
     show(): void;
     hide(): void;
@@ -23,8 +23,8 @@ export interface IXlNotice {
 class XlNotice implements IXlNotice {
     showHandle: Call | null = null;
     hideHandle: Call | null = null;
-    addHandle: AddCall | null = null;
-    countHandle: CountCall | null = null;
+    addHandle: SetValue<XlNoticeItem> | null = null;
+    countHandle: GetNumber | null = null;
     get count(): number {
         let handle = this.countHandle;
         if (handle) {

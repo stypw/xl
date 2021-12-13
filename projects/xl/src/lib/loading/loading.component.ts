@@ -1,13 +1,12 @@
 import { Component, ElementRef, HostBinding, Input } from "@angular/core";
+import { Call, SetValue } from "../types/types";
 
-type Call = () => void;
-type StringCall = (text?: string) => void;
 export interface IXlLoading {
   show(text?: string): void;
   hide(): void;
 }
 class XlLoading implements IXlLoading {
-  showHandle: StringCall | null = null;
+  showHandle: SetValue<string | undefined> | null = null;
   hideHandle: Call | null = null;
   show(text?: string): void {
     let handle = this.showHandle;
@@ -39,7 +38,7 @@ export function loadingUnregister() {
   loading = null;
 }
 
-export function showLoading(txt?:string) {
+export function showLoading(txt?: string) {
   if (loading) {
     loading.show(txt);
   } else {

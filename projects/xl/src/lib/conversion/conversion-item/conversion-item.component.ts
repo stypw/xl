@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, Input } from '@angular/core';
+import { Component, Directive, HostBinding, Inject, Input, Self, TemplateRef } from '@angular/core';
 import { sleep } from '../../tools';
 import { IXlConversionBox, IXlConversionInjection } from "../define";
 
@@ -32,12 +32,12 @@ export class XlConversionItemComponent {
       }
     }
 
- 
+
   }
   get actived(): boolean {
     return this._actived;
   }
-  async ngAfterViewInit(){
+  async ngAfterViewInit() {
     await sleep(50);
     if (this._actived) {
       this.xlConversionBox.active(this.idx);
@@ -50,5 +50,23 @@ export class XlConversionItemComponent {
     private xlConversionBox: IXlConversionBox
   ) {
     this.idx = this.xlConversionBox.getIndex();
+  }
+}
+
+
+
+@Directive({
+  selector: "xlConversionItemTemplate"
+})
+export class XlConversionItemTemplate {
+
+  constructor(
+    @Inject(IXlConversionInjection)
+    private xlConversionBox: IXlConversionBox,
+    @Self()
+    private template: TemplateRef<any>
+  ) { 
+
+    
   }
 }
