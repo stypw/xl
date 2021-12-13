@@ -10,15 +10,11 @@ export * from "./svg";
 export * from "./toast";
 export * from "./notice";
 export * from "./form";
-export * from "./conversion";
-export * from "./carousel";
-export * from "./toggle";
-export * from "./tab";
+export * from "./conversion/carousel";
+export * from "./conversion/tab";
 
-import { XlTabModule } from "./tab";
-import { XlToggleModule } from "./toggle";
-import { XlCarouselModule } from "./carousel";
-import { XlConversionModule } from "./conversion";
+import { XlTabModule } from "./conversion/tab";
+import { XlCarouselModule } from "./conversion/carousel";
 import { XlFormModule } from "./form";
 import { XlNoticeModule } from "./notice";
 import { XlToastModule } from "./toast";
@@ -30,9 +26,7 @@ import { XlBindingModule } from "./binding";
 
 const modules = [
     XlTabModule,
-    XlToggleModule,
     XlCarouselModule,
-    XlConversionModule,
     XlNoticeModule,
     XlToastModule,
     XlSvgModule,

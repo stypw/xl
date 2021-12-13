@@ -1,1 +1,3 @@
-<p>carousel works!</p>
+<div style="width:1000px;height:600px;" xlCarousel>
+    <div *ngFor="let txt of tabTexts;let od =odd;"  [style.background-color]="od?'red':'green'" xlCarouselItem>{{txt}}</div>
+</div>

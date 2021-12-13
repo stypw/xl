@@ -1,13 +1,3 @@
-<div style="width:500px;height:300px;" xlTab>
-    <div xlTabItem>tabItem1</div>
-    <div xlTabItem>tabItem2</div>
-    <div xlTabItem>tabItem3</div>
-    <div xlTabItem>tabItem4</div>
-    <div xlTabItem>tabItem5</div>
-    <div xlTabItem>tabItem6</div>
-    <div xlTabItem>tabItem7</div>
-    <div xlTabItem>tabItem1</div>
-    <div xlTabItem>tabItem1</div>
-    <div xlTabItem>tabItem1</div>
-    <div xlTabItem>tabItem1</div>
+<div style="width:1000px;height:600px;" xlTab>
+    <div *ngFor="let txt of tabTexts;let od =odd;" [header]="txt" [style.background-color]="od?'red':'green'" xlTabItem>{{txt}}</div>
 </div>

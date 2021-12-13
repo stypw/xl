@@ -1,200 +1,168 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { GetNumber, SetNumber, SetValue } from '../types/types';
-import { IXlConversionInjection, IXlConversionBox } from "./define";
-
-export interface IXlConversion {
-  toIndex(i: number): void;
-  get index(): number;
-  set index(v: number);
-  toNext(loop?: boolean): void;
-  toPrev(loop?: boolean): void;
+import { Directive, forwardRef, HostBinding, Inject, InjectionToken } from "@angular/core";
+import { sleep } from "../tools";
+export interface IXlConversionItem {
+    readonly index: number;
+    order: number;
 }
 
-type ConversionState = "NONE" | "RIGHT" | "LEFT";
-
-class XlConversion implements IXlConversion {
-  getIndexHandle: GetNumber | null = null;
-  setIndexHandle: SetNumber | null = null;
-
-  get index(): number {
-    let handle = this.getIndexHandle;
-    if (handle) {
-      return handle();
-    }
-    return -1;
-  }
-  set index(v: number) {
-    let handle = this.setIndexHandle;
-    if (handle) {
-      handle(v);
-    }
-  }
-
-  toIndexHandle:  SetNumber | null = null;
-  toNextHandle: SetValue<boolean | undefined> | null = null;
-  toPrevHandle: SetValue<boolean | undefined> | null = null;
-  toIndex(i: number): void {
-    let handle = this.toIndexHandle;
-    handle && handle(i);
-  }
-  toNext(loop?: boolean): void {
-    let handle = this.toNextHandle;
-    handle && handle(loop);
-  }
-  toPrev(loop?: boolean): void {
-    let handle = this.toPrevHandle
-    handle && handle(loop);
-  }
+export interface IXlConversionBox {
+    addItem(item: IXlConversionItem): number;
 }
-export namespace IXlConversion {
-  export function create(): IXlConversion {
-    return new XlConversion();
-  }
-}
-@Component({
-  selector: 'xlConversion,[xlConversion]',
-  templateUrl: './conversion.component.html',
-  styleUrls: ['./conversion.component.scss'],
-  providers: [
-    { provide: IXlConversionInjection, useExisting: forwardRef(() => XlConversionComponent) }
-  ]
+
+export const IXlConversionInjection = new InjectionToken<IXlConversionBox>('IXlConversionInjection');
+export type ConversionState = "RIGHT" | "LEFT" | "NONE";
+
+@Directive({
+    selector: "[xlConversion]"
 })
-export class XlConversionComponent implements IXlConversionBox {
+export abstract class XlConversionComponent<T extends IXlConversionItem> implements IXlConversionBox {
+    state: ConversionState = "NONE";
 
-  count = 0;
+    curr = 0;
+    left = -1;
+    right = 0;
 
-  curr = 0;
-  left = -1;
-  right = 1;
-
-  state: ConversionState = "NONE";
-
-  active(idx: number) {
-    let left = idx - 1;
-    if (left < 0) {
-      left = this.count - 1;
-    }
-    let right = idx + 1;
-    if (right >= (this.count - 1)) {
-      right = 0;
-    }
-    this.left = left;
-    this.curr = idx;
-    this.right = right;
-  }
-
-  getCurrent() {
-    return this.curr;
-  }
-
-  getIndex() {
-    let idx = this.count;
-    this.count++;
-    return idx;
-  }
-  getOrder(idx: number) {
-    if (this.count == 1) {
-      return 2;
+    getCurr() {
+        return this.curr;
     }
 
-    if (idx == this.curr) {
-      return 2;
-    }
-    if (idx == this.left) {
-      return 1;
-    }
-    if (idx == this.right) {
-      return 3;
+
+    onTransitionend() {
+        if (this.state == "LEFT") {
+            this.curr = this.right;
+
+        } else {
+            this.curr = this.left;
+        }
+        let left = this.curr - 1;
+        let right = this.curr + 1;
+        if (this.count == 2) {
+            left = -1;
+            right = -1;
+        } else {
+            if (left < 0) {
+                left = this.count - 1;
+            }
+            if (right >= this.count) {
+                right = 0;
+            }
+        }
+        this.left = left;
+        this.right = right;
+        this.state = 'NONE';
+        this.updateOrders();
     }
 
-    return 4;
-  }
+    getOrder(idx: number) {
+        if (this.count == 1) {
+            return 2;
+        }
 
-  @Input()
-  set xlConversion(handle: IXlConversion | string | null | undefined) {
-    if (handle instanceof XlConversion) {
-      handle.toIndexHandle = this.toIndex.bind(this);
-      handle.toNextHandle = this.toNext.bind(this);
-      handle.toPrevHandle = this.toPrev.bind(this);
-      handle.getIndexHandle = this.getCurrent.bind(this);
-      handle.setIndexHandle = this.toIndex.bind(this);
-    }
-  }
+        if (idx == this.curr) {
+            return 2;
+        }
+        if (idx == this.left) {
+            return 1;
+        }
+        if (idx == this.right) {
+            return 3;
+        }
 
-  toIndex(idx: number) {
-
-    if (this.curr == idx) {
-      return;
-    }
-    if (idx < 0 || idx >= this.count) {
-      return;
-    }
-    if (idx > this.curr) {
-      this.right = idx;
-      this.state = "LEFT";
-    } else {
-      this.left = idx;
-      this.state = "RIGHT";
-    }
-  }
-
-  onTransitionend() {
-    if (this.state == "LEFT") {
-      this.curr = this.right;
-
-    } else {
-      this.curr = this.left;
-    }
-    let left = this.curr - 1;
-    let right = this.curr + 1;
-    if (this.count == 2) {
-      left = -1;
-      right = -1;
-    } else {
-      if (left < 0) {
-        left = this.count - 1;
-      }
-      if (right >= this.count) {
-        right = 0;
-      }
-    }
-    this.left = left;
-    this.right = right;
-    this.state = 'NONE';
-  }
-
-  toNext(loop: boolean = true) {
-    if (this.state != "NONE") {
-      return;
-    }
-    if (this.count < 2) {
-      return;
-    }
-    if (this.count == 2) {
-      this.left = -1;
-    }
-    let right = this.curr + 1;
-    if (right >= this.count) {
-      right = 0;
-    }
-    this.right = right;
-
-    this.state = 'LEFT';
-  }
-
-  toPrev(loop: boolean = true) {
-    if (this.state != "NONE") {
-      return;
-    }
-    if (this.count < 2) {
-      return;
+        return 4;
     }
 
-    let left = this.curr - 1;
-    if (left < 0) {
-      left = this.count - 1;
+
+    updateOrders() {
+        for (const item of this.list) {
+            item.order = this.getOrder(item.index);
+        }
     }
-    this.left = left;
-    this.state = 'RIGHT';
-  }
+
+
+    setCurr(idx: number) {
+        if (this.curr == idx) {
+            return;
+        }
+        if (idx < 0 || idx >= this.count) {
+            return;
+        }
+        if (idx > this.curr) {
+            this.right = idx;
+            this.state = "LEFT";
+        } else {
+            this.left = idx;
+            this.state = "RIGHT";
+        }
+        this.updateOrders();
+    }
+    next() {
+        if (this.state != "NONE") {
+            return;
+        }
+        if (this.count < 2) {
+            return;
+        }
+        if (this.count == 2) {
+            this.left = -1;
+        }
+        let right = this.curr + 1;
+        if (right >= this.count) {
+            right = 0;
+        }
+        this.right = right;
+
+        this.state = 'LEFT';
+        this.updateOrders();
+    }
+    prev() {
+        if (this.state != "NONE") {
+            return;
+        }
+        if (this.count < 2) {
+            return;
+        }
+
+        let left = this.curr - 1;
+        if (left < 0) {
+            left = this.count - 1;
+        }
+        this.left = left;
+        this.state = 'RIGHT';
+        this.updateOrders();
+    }
+
+    list:T[] = [];
+    get count() {
+        return this.list.length;
+    }
+
+    async ngAfterViewInit() {
+        await sleep(50);
+        this.updateOrders();
+    }
+
+    addItem(item: T): number {
+        let idx = this.list.length;
+        this.list.push(item);
+        return idx;
+    }
+}
+
+
+
+@Directive({
+    selector: 'xlConversionItem,[xlConversionItem]'
+})
+export class XlConversionItemComponent implements IXlConversionItem {
+    
+    readonly index: number;
+
+    @HostBinding("style.order")
+    order: number = 0;
+    
+    constructor(
+        @Inject(IXlConversionInjection)xlConversionBox: IXlConversionBox
+    ) {
+        this.index = xlConversionBox.addItem(this);
+    }
 }

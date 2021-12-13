@@ -5,11 +5,20 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss']
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent  {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  tabTexts = [
+    "tabItem1",
+    "tabItem2",
+    "tabItem3",
+    "tabItem4",
+    "tabItem5",
+    "tabItem6",
+    "tabItem7",
+    "tabItem8",
+    "tabItem9",
+    "tabItem10",
+    "tabItem11"
+  ]
 
 }

@@ -1,0 +1,17 @@
+<div class="carousel-box">
+   <div class="carousel-dots">
+      <div class="dots-set">
+         <div class="dot-item" (click)="dotItemClick(item);" [class.actived]="item.index == curr"
+            *ngFor="let item of list;"></div>
+      </div>
+   </div>
+   <div class="carousel-content">
+      <div class="cut-box">
+         <div (transitionend)="onTransitionend();" [class.toleft]="state=='LEFT'" [class.toright]="state=='RIGHT'"
+            class="conversion-box">
+            <div class="subitem" [class.show]="left==-1" style="order:0"></div>
+            <ng-content></ng-content>
+         </div>
+      </div>
+   </div>
+</div>
