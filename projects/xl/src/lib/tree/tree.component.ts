@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+export type TreeNode = {
+  text: string;
+  children?: TreeNode[];
+  extra?: any;
+}
 
 @Component({
-  selector: 'lib-tree',
+  selector: 'xlTree,[xlTree]',
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss']
 })
-export class TreeComponent implements OnInit {
+export class XlTreeComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input()
+  nodes: TreeNode[] = [];
 
 }

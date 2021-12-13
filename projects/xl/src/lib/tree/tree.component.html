@@ -1,1 +1,19 @@
-<p>tree works!</p>
+<ng-container *ngFor="let node of nodes;let lst = last;">
+    <div class="node-item" >
+        <div class="left-line" [class.last]="lst" ></div>
+        <div class="node-content" >
+            <div class="tie-line"></div>
+            <div class="node-icon">
+                <div *ngIf="!node.children || !node.children.length" style="width: 100%;height:100%;--color:blue;"
+                    xlSvg="emptyFile"></div>
+                <div *ngIf="node.children && node.children.length" style="width: 100%;height:100%;--color:blue;"
+                    xlSvg="expand"></div>
+            </div>
+            <div class="node-text">
+                <div>{{node.text}}</div>
+            </div>
+        </div>
+        <div  *ngIf="node.children"  class="node-children" xlTree [nodes]="node.children"></div>
+        
+    </div>
+</ng-container>

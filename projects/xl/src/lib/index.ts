@@ -12,7 +12,8 @@ export * from "./notice";
 export * from "./form";
 export * from "./conversion/carousel";
 export * from "./conversion/tab";
-
+export * from "./tree";
+import { XlTreeModule } from "./tree";
 import { XlTabModule } from "./conversion/tab";
 import { XlCarouselModule } from "./conversion/carousel";
 import { XlFormModule } from "./form";
@@ -25,6 +26,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlTreeModule,
     XlTabModule,
     XlCarouselModule,
     XlNoticeModule,

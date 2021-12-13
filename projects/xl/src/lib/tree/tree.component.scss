@@ -1,0 +1,49 @@
+$border:1px solid yellow;
+:host{
+    .node-item{
+        padding-left:30px;
+        position: relative;
+        .left-line{
+            position: absolute;
+            top:0px;
+            bottom:-15px;
+            left:0px;
+            width:1px;
+            background-color: yellow;
+            &.last{
+                background-color: transparent;
+            }
+        }
+
+       
+        .node-content{
+            position: relative;
+            .tie-line{
+                position: absolute;
+                top:15px;
+                height: 1px;
+                left:-30px;
+                width: 20px;
+                background-color: yellow;
+            }
+            width: auto;
+            height: 30px;
+            font-size: 16px;
+            position: relative;
+            line-height: 30px;
+            .node-icon{
+                width:20px;
+                height: 20px;
+                position: absolute;
+                left:-10px;
+                top:5px;
+            }
+            .node-text{
+                padding-left: 15px;
+            }
+        }
+        .node-children{
+            position: relative;
+        }
+    }
+}

@@ -17,6 +17,7 @@ export class XlSvgComponent {
             }
         }
         this.pathes = null;
+
     }
 
     constructor() { }
