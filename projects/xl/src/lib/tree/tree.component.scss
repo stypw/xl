@@ -1,6 +1,7 @@
 $border:1px solid yellow;
 :host{
     .node-item{
+       
         padding-left:30px;
         position: relative;
         .left-line{
@@ -43,7 +44,11 @@ $border:1px solid yellow;
             }
         }
         .node-children{
-            position: relative;
+            overflow: hidden;
+           
+            &.not-show{
+                max-height: 0px;
+            }
         }
     }
 }

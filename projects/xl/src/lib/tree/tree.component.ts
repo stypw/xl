@@ -4,6 +4,7 @@ export type TreeNode = {
   text: string;
   children?: TreeNode[];
   extra?: any;
+  expand?: boolean;
 }
 
 @Component({
@@ -16,4 +17,11 @@ export class XlTreeComponent {
   @Input()
   nodes: TreeNode[] = [];
 
+  expandChange(node: TreeNode,evt:MouseEvent) {
+    evt.stopImmediatePropagation();
+    evt.stopPropagation();
+    evt.preventDefault();
+    console.log(node);
+    node.expand = !node.expand;
+  }
 }

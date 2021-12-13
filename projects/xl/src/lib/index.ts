@@ -13,6 +13,9 @@ export * from "./form";
 export * from "./conversion/carousel";
 export * from "./conversion/tab";
 export * from "./tree";
+export * from "./realheight";
+
+import { XlRealHeightModule } from "./realheight";
 import { XlTreeModule } from "./tree";
 import { XlTabModule } from "./conversion/tab";
 import { XlCarouselModule } from "./conversion/carousel";
@@ -26,6 +29,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlRealHeightModule,
     XlTreeModule,
     XlTabModule,
     XlCarouselModule,

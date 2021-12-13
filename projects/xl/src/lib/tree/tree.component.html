@@ -6,14 +6,16 @@
             <div class="node-icon">
                 <div *ngIf="!node.children || !node.children.length" style="width: 100%;height:100%;--color:blue;"
                     xlSvg="emptyFile"></div>
-                <div *ngIf="node.children && node.children.length" style="width: 100%;height:100%;--color:blue;"
+                <div (click)="expandChange(node,$event);" *ngIf="node.children && node.children.length" style="width: 100%;height:100%;--color:blue;"
                     xlSvg="expand"></div>
             </div>
             <div class="node-text">
-                <div>{{node.text}}</div>
+                <div>{{node.text}},expand:{{node.expand || 'false'}}</div>
             </div>
         </div>
-        <div  *ngIf="node.children"  class="node-children" xlTree [nodes]="node.children"></div>
+        <div class="node-children" [xlFold]="!node.expand"  >
+            <div  *ngIf="node.children" xlTree [nodes]="node.children"></div>
+        </div>
         
     </div>
 </ng-container>
