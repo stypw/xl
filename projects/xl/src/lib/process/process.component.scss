@@ -1,0 +1,15 @@
+:host{
+    position: relative;
+    width:var(--width,100px);
+    height: var(--height,30px);
+    border-radius: calc(var(--height,30px) / 2);
+    background-color: var(--bk-color,#ccc);
+    .process{
+        position: absolute;
+        background-color: var(--color,yellow);
+        border-radius: inherit;
+        top:0px;
+        bottom: 0px;
+        left:0px;
+    }
+}

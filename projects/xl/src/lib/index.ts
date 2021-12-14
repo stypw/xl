@@ -14,7 +14,8 @@ export * from "./conversion/carousel";
 export * from "./conversion/tab";
 export * from "./tree";
 export * from "./fold";
-
+export * from "./process";
+import { XlProcessModule } from "./process";
 import { XlFoldModule } from "./fold";
 import { XlTreeModule } from "./tree";
 import { XlTabModule } from "./conversion/tab";
@@ -29,6 +30,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlProcessModule,
     XlFoldModule,
     XlTreeModule,
     XlTabModule,
