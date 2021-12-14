@@ -3,3 +3,11 @@ export function sleep(interval: number = 500) {
         setTimeout(s, interval);
     })
 }
+
+export function nextFrame() {
+    return new Promise<void>(s => {
+        window.requestAnimationFrame(()=>{
+            s();
+        });
+    });
+}

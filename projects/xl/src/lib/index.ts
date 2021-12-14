@@ -15,6 +15,8 @@ export * from "./conversion/tab";
 export * from "./tree";
 export * from "./fold";
 export * from "./process";
+export * from "./slider";
+import { XlSilderModule } from "./slider";
 import { XlProcessModule } from "./process";
 import { XlFoldModule } from "./fold";
 import { XlTreeModule } from "./tree";
@@ -30,6 +32,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlSilderModule,
     XlProcessModule,
     XlFoldModule,
     XlTreeModule,

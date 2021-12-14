@@ -1,0 +1,89 @@
+$color:rgb(0, 225, 255);
+:host{
+    user-select: none;
+    height: 6px;
+    position: relative;
+    border-radius: 3px;
+    background-color: #ccc;
+    overflow: visible;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    .show-value{
+        position: absolute;
+        left:0px;
+        background-color: var(--color,$color);
+        box-sizing: border-box;
+        top:0px;
+        bottom:0px;
+        width:6px;
+
+        border-radius: 3px;
+        pointer-events: none;
+    }
+    .setp-block{
+        position: absolute;
+       
+        background-color: white;
+        box-sizing: border-box;
+        top:0px;
+        bottom:0px;
+        width:6px;
+        border-radius: 3px;
+        z-index: 100;
+        pointer-events: none;
+        cursor: pointer;
+    }
+    .picker{
+        position: absolute;
+        left:0px;
+        background-color: white;
+        box-sizing: border-box;
+        top:-3px;
+        bottom:-3px;
+        width:12px;
+        border:2px solid var(--color,$color);
+        border-radius: 6px;
+        cursor: pointer;
+        overflow: visible;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        .val-area{
+            position: relative;
+            width:100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            .val-content{
+                position: absolute;
+                bottom: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+                .val-text{
+                    background-color: #666;
+                    color:white;
+                    font-size: 12px;
+                    padding:0px 3px;
+                    border-radius: 4px;
+                }
+                .val-arrow{
+                    width:0px;
+                    height: 0px;
+                    border:4px solid transparent;
+                    border-top: 4px solid #666;
+                }
+            }
+        }
+    }
+}

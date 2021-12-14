@@ -1,1 +1,10 @@
-<p>slider works!</p>
+<div class="show-value" [xlBinding]="showValue" ></div>
+<div class="picker" (mousedown)="mouseDownInPicker($event);" [xlBinding]="picker" >
+    <div class="val-area">
+        <div class="val-content" >
+            <div class="val-text">{{_value}}</div>
+            <div class="val-arrow"></div>
+        </div>
+    </div>
+</div>
+<div class="setp-block" *ngFor="let stepblock of stepBlocks;" [style.left]="stepblock+3+'px'" ></div>
