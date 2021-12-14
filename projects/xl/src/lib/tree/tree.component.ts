@@ -5,6 +5,7 @@ export type TreeNode = {
   children?: TreeNode[];
   extra?: any;
   expand?: boolean;
+  checked?:boolean;
 }
 
 @Component({
@@ -21,7 +22,6 @@ export class XlTreeComponent {
     evt.stopImmediatePropagation();
     evt.stopPropagation();
     evt.preventDefault();
-    console.log(node);
     node.expand = !node.expand;
   }
 }
