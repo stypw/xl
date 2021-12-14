@@ -10,6 +10,9 @@ import { XlLinkComponent } from './link.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    XlLinkComponent
   ]
 })
 export class XlLinkModule { }

@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, HostListener } from '@angular/core
 import { AcceptString } from '../types/types';
 import { IXlBinding } from "../binding";
 import { nextFrame } from "../tools";
-import { IXlListener } from "../global-listen";
+import { IXlListener } from "../listener";
 @Component({
   selector: 'xlSlider,[xlSlider]',
   templateUrl: './slider.component.html',

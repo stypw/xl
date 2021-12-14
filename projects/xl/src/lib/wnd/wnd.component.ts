@@ -1,6 +1,6 @@
 
 import { Component, Input, Optional, Self, ElementRef, HostListener, HostBinding } from "@angular/core";
-import { IXlListener } from "../global-listen";
+import { IXlListener } from "../listener";
 import { XlWndLimitCompoent } from "./wnd-limit/wnd-limit.compoent";
 
 export type MouseEventHandle = ((evt: MouseEvent) => void) | null;

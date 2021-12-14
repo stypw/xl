@@ -1,25 +1,16 @@
-<div style="position: sticky;top:80px;">
-    <a [routerLink]="['./']" fragment="normalwnd1">这是一个普通的弹窗</a>
-</div>
-
-
-<div style="height: 100vh;" >
-
-</div>
-<h1 id="normalwnd">显示一个普通的弹窗</h1>
-<div style="height: 100vh;" >
-
-</div>
-
-<div style="position: sticky;top:80px;">
-    <a [routerLink]="['./']" fragment="normalwnd">这是一个普通的弹窗</a>
-</div>
-
-
-<div style="height: 100vh;" >
-
-</div>
-<h1 id="normalwnd1">显示一个普通的弹窗</h1>
-<div style="height: 100vh;" >
-
+<div class="fl-hor">
+    <div class="fl-zoom-1">
+        <h3 #a1>锚点1</h3>
+        <div style="height: 100vh;"></div>
+        <h3 #a2>锚点2</h3>
+        <div style="height: 100vh;"></div>
+        <h3 #a3>锚点3</h3>
+        <div style="height: 100vh;"></div>
+    </div>
+    <div style="row-gap: 10px; padding:10px;width: 200px;height:300px;background-color: rgb(66, 243, 214);position: sticky;top:120px;color:white;"
+        class="fl-zoom-0 fl-ver">
+        <a [xlLink]="a1" xlTargetActived="actived" xlLinkActived="actived" xlHash="a1">锚点1</a>
+        <a [xlLink]="a2" xlTargetActived="actived" xlLinkActived="actived" xlHash="a2">锚点2</a>
+        <a [xlLink]="a3" xlTargetActived="actived" xlLinkActived="actived" xlHash="a3">锚点3</a>
+    </div>
 </div>

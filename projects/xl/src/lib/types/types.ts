@@ -3,6 +3,8 @@
 export type Nullable<T> = T | null;
 export type AcceptString<T> = T | string | null | undefined;
 export type Call = () => void;
+export type Pass<T> = (v: T) => void;
+
 export type GetValue<T> = () => T;
 export type SetValue<T> = (v: T) => void;
 export type GetNumber = GetValue<number>;
