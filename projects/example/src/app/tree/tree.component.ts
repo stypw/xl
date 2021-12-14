@@ -56,4 +56,8 @@ export class TreeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  expand = true;
+  change() {
+    this.expand = !this.expand;
+  }
 }

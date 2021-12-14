@@ -1,7 +1,8 @@
-$border:1px solid yellow;
+$lunk:1px dashed yellow;
 :host{
+
     .node-item{
-       
+        
         padding-left:30px;
         position: relative;
         .left-line{
@@ -10,22 +11,28 @@ $border:1px solid yellow;
             bottom:-15px;
             left:0px;
             width:1px;
-            background-color: yellow;
+            border-left:var(--lunk,#{$lunk});
             &.last{
-                background-color: transparent;
+                border-left-color: transparent;
             }
         }
 
        
         .node-content{
             position: relative;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            padding-left: 15px;
+            align-items: center;
+            align-content: center;
             .tie-line{
                 position: absolute;
                 top:15px;
                 height: 1px;
                 left:-30px;
                 width: 20px;
-                background-color: yellow;
+                border-bottom:var(--lunk,#{$lunk});
             }
             width: auto;
             height: 30px;
@@ -38,9 +45,16 @@ $border:1px solid yellow;
                 position: absolute;
                 left:-10px;
                 top:5px;
+                .expand{
+                    transform: rotateZ(0deg);
+                    transition: transform 300ms;
+                    &.unexpand{
+                        transform: rotateZ(-90deg);
+                    }
+                }
             }
             .node-text{
-                padding-left: 15px;
+               
             }
         }
         .node-children{

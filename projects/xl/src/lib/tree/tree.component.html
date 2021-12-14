@@ -4,16 +4,19 @@
         <div class="node-content" >
             <div class="tie-line"></div>
             <div class="node-icon">
-                <div *ngIf="!node.children || !node.children.length" style="width: 100%;height:100%;--color:blue;"
+                <div  *ngIf="!node.children || !node.children.length" style="width: 100%;height:100%;--color:blue;"
                     xlSvg="emptyFile"></div>
-                <div (click)="expandChange(node,$event);" *ngIf="node.children && node.children.length" style="width: 100%;height:100%;--color:blue;"
+                <div class="expand" [class.unexpand]="!node.expand"  (click)="expandChange(node,$event);" *ngIf="node.children && node.children.length" style="width: 100%;height:100%;--color:blue;"
                     xlSvg="expand"></div>
             </div>
+            <div class="node-check">
+                <input type="checkbox"/>
+            </div>
             <div class="node-text">
-                <div>{{node.text}},expand:{{node.expand || 'false'}}</div>
+                <div>{{node.text}}</div>
             </div>
         </div>
-        <div class="node-children" [xlFold]="!node.expand"  >
+        <div class="node-children" [xlFold]="!node.expand"  duration="300ms" >
             <div  *ngIf="node.children" xlTree [nodes]="node.children"></div>
         </div>
         
