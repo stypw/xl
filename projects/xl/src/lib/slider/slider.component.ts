@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, HostListener } from '@angular/core
 import { AcceptString } from '../types/types';
 import { IXlBinding } from "../binding";
 import { nextFrame } from "../tools";
-import { IGlobalListener } from "../global-listen";
+import { IXlListener } from "../global-listen";
 @Component({
   selector: 'xlSlider,[xlSlider]',
   templateUrl: './slider.component.html',
@@ -193,7 +193,7 @@ export class XlSliderComponent {
 
   picker = IXlBinding.create();
   showValue = IXlBinding.create();
-  listener = IGlobalListener.create();
+  listener = IXlListener.create();
 
   _max = 100;
   _min = 0;

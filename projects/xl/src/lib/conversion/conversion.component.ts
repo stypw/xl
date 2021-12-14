@@ -1,5 +1,5 @@
-import { Directive, forwardRef, HostBinding, Inject, InjectionToken } from "@angular/core";
-import { sleep } from "../tools";
+import { Directive, HostBinding, Inject, InjectionToken, Input } from "@angular/core";
+import { nextFrame } from "../tools";
 export interface IXlConversionItem {
     readonly index: number;
     order: number;
@@ -16,6 +16,10 @@ export type ConversionState = "RIGHT" | "LEFT" | "NONE";
     selector: "[xlConversion]"
 })
 export abstract class XlConversionComponent<T extends IXlConversionItem> implements IXlConversionBox {
+   
+    @Input()
+    duration = "3000ms";
+   
     state: ConversionState = "NONE";
 
     curr = 0;
@@ -27,7 +31,8 @@ export abstract class XlConversionComponent<T extends IXlConversionItem> impleme
     }
 
 
-    onTransitionend() {
+    async onTransitionend() {
+        await nextFrame();
         if (this.state == "LEFT") {
             this.curr = this.right;
 
@@ -79,21 +84,24 @@ export abstract class XlConversionComponent<T extends IXlConversionItem> impleme
     }
 
 
-    setCurr(idx: number) {
+    async setCurr(idx: number) {
         if (this.curr == idx) {
             return;
         }
         if (idx < 0 || idx >= this.count) {
             return;
         }
+        let state:ConversionState = "NONE";
         if (idx > this.curr) {
             this.right = idx;
-            this.state = "LEFT";
+            state = "LEFT";
         } else {
             this.left = idx;
-            this.state = "RIGHT";
+            state = "RIGHT";
         }
         this.updateOrders();
+        await nextFrame();
+        this.state = state;
     }
     next() {
         if (this.state != "NONE") {
@@ -134,10 +142,10 @@ export abstract class XlConversionComponent<T extends IXlConversionItem> impleme
     list:T[] = [];
     get count() {
         return this.list.length;
-    }
+    } 
 
     async ngAfterViewInit() {
-        await sleep(50);
+        await nextFrame();
         this.updateOrders();
     }
 
@@ -159,7 +167,7 @@ export class XlConversionItemComponent implements IXlConversionItem {
 
     @HostBinding("style.order")
     order: number = 0;
-    
+
     constructor(
         @Inject(IXlConversionInjection)xlConversionBox: IXlConversionBox
     ) {

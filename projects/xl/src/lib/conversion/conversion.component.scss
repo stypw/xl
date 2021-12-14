@@ -6,7 +6,7 @@
         overflow: hidden;
         position: relative;
       
-
+      
 
         .conversion-box{
 
@@ -24,11 +24,11 @@
           
 
             &.toleft{
-                transition: left 3000ms;
+                transition: left var(--duration,3000ms);
                 left:-200%;
             }
             &.toright{
-                transition: left 3000ms;
+                transition: left var(--duration,3000ms);
                 left:0%;
             }
 

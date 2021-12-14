@@ -16,6 +16,8 @@ export * from "./tree";
 export * from "./fold";
 export * from "./process";
 export * from "./slider";
+export * from "./link";
+import{ XlLinkModule } from "./link";
 import { XlSilderModule } from "./slider";
 import { XlProcessModule } from "./process";
 import { XlFoldModule } from "./fold";
@@ -32,6 +34,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlLinkModule,
     XlSilderModule,
     XlProcessModule,
     XlFoldModule,

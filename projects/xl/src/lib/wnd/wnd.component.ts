@@ -1,6 +1,6 @@
 
 import { Component, Input, Optional, Self, ElementRef, HostListener, HostBinding } from "@angular/core";
-import { IGlobalListener } from "../global-listen";
+import { IXlListener } from "../global-listen";
 import { XlWndLimitCompoent } from "./wnd-limit/wnd-limit.compoent";
 
 export type MouseEventHandle = ((evt: MouseEvent) => void) | null;
@@ -23,18 +23,14 @@ export type SetRect = {
   }
 })
 export class XlWndComponent {
-  listenHandle: MouseEventHandle = null;
-  unlistenHandle: MouseEventHandle = null;
 
-  listener: IGlobalListener = IGlobalListener.create();
+  listener: IXlListener;
 
   moveHandle: MouseEventHandle = null;
   mouseMoveInPanel(evt: MouseEvent) {
     let call = this.moveHandle;
     if (call) { call(evt) };
   }
-
-
 
   @HostListener("dragstart")
   ondragstart() {
@@ -62,40 +58,16 @@ export class XlWndComponent {
   }
 
   startListen() {
-    this.listenHandle = this.mouseMoveInPanel.bind(this);
-    this.unlistenHandle = this.clearMove.bind(this);
-
-    if (this.panel) {
-      this.panel.el?.nativeElement?.addEventListener("mousemove", this.listenHandle);
-      this.panel.el?.nativeElement?.addEventListener("mouseleave", this.unlistenHandle);
-      this.panel.el?.nativeElement?.addEventListener("mouseup", this.unlistenHandle);
-    } else {
-      this.listener.on("mousemove", this.listenHandle);
-      this.listener.on("mouseleave", this.unlistenHandle);
-      this.listener.on("mouseup", this.unlistenHandle);
-    }
+    this.listener.on("mousemove", this.mouseMoveInPanel.bind(this));
+    this.listener.on("mouseleave", this.endListen.bind(this));
+    this.listener.on("mouseup", this.endListen.bind(this));
   }
   endListen() {
-    if (this.panel) {
-      this.listenHandle && this.panel.el?.nativeElement?.removeEventListener("mousemove", this.listenHandle);
-      this.unlistenHandle && this.panel.el?.nativeElement?.removeEventListener("mouseleave", this.unlistenHandle);
-      this.unlistenHandle && this.panel.el?.nativeElement?.removeEventListener("mouseup", this.unlistenHandle);
-    } else {
-      this.listener.off("mousemove");
-      this.listener.off("mouseleave");
-      this.listener.off("mouseup");
-    }
-
-    this.listenHandle = null;
-    this.unlistenHandle = null;
+    this.listener.off("mousemove");
+    this.listener.off("mouseleave");
+    this.listener.off("mouseup");
     this.moveHandle = null;
   }
-
-  clearMove(evt: MouseEvent) {
-    this.moveHandle = null;
-  }
-
-  ngOnInit() { }
 
   ngOnDestroy() {
     this.listener.destory();
@@ -158,7 +130,6 @@ export class XlWndComponent {
     }
     if (rect.width !== undefined) {
       if (rect.width > (maxWidth - left)) {
-        console.log(rect.width, left, maxWidth);
         rect.width = maxWidth - left
       };
       view.style.width = rect.width + "px";
@@ -173,8 +144,10 @@ export class XlWndComponent {
     this.startListen();
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const viewRect = view.getBoundingClientRect();
-    const top = viewRect.top - this.panelTop;
-    const left = viewRect.left - this.panelLeft;
+
+    const panelRect = this.getPanelRect();
+    const top = viewRect.top - panelRect.top;
+    const left = viewRect.left - panelRect.left;
     const self = this;
     this.moveHandle = (now: MouseEvent) => {
       const offsetX = (now.clientX - start.clientX);
@@ -193,7 +166,7 @@ export class XlWndComponent {
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const height = view.clientHeight;
     const viewRect = view.getBoundingClientRect();
-    const top = viewRect.top - this.panelTop;
+    const top = viewRect.top - this.getPanelRect().top;
     const self = this;
     this.moveHandle = (now: MouseEvent) => {
       const offset = (now.clientY - start.clientY);
@@ -222,7 +195,7 @@ export class XlWndComponent {
     const view = (this.resizeBorder.nativeElement as HTMLElement);
     const width = view.clientWidth;
     const viewRect = view.getBoundingClientRect();
-    const left = viewRect.left - this.panelLeft;
+    const left = viewRect.left - this.getPanelRect().left;
     const self = this;
     this.moveHandle = (now: MouseEvent) => {
       const offset = (now.clientX - start.clientX);
@@ -253,8 +226,9 @@ export class XlWndComponent {
     const height = view.clientHeight;
     const width = view.clientWidth;
     const viewRect = view.getBoundingClientRect();
-    const top = viewRect.top - this.panelTop;
-    const left = viewRect.left - this.panelLeft;
+    const panelRect = this.getPanelRect();
+    const top = viewRect.top - panelRect.top;
+    const left = viewRect.left - panelRect.left;
     const self = this;
     this.moveHandle = (now: MouseEvent) => {
       let offsetY = (now.clientY - start.clientY);
@@ -275,7 +249,7 @@ export class XlWndComponent {
     const height = view.clientHeight;
     const width = view.clientWidth;
     const viewRect = view.getBoundingClientRect();
-    const top = viewRect.top - this.panelTop;
+    const top = viewRect.top - this.getPanelRect().top;
     const self = this;
     this.moveHandle = (now: MouseEvent) => {
       const offset = (now.clientY - start.clientY);
@@ -294,7 +268,7 @@ export class XlWndComponent {
     const width = view.clientWidth;
     const height = view.clientHeight;
     const viewRect = view.getBoundingClientRect();
-    const left = viewRect.left - this.panelLeft;
+    const left = viewRect.left - this.getPanelRect().left;
     const self = this;
     this.moveHandle = (now: MouseEvent) => {
       const offset = (now.clientX - start.clientX);
@@ -321,6 +295,16 @@ export class XlWndComponent {
     };
   }
 
+  getPanelRect(): DOMRect {
+    const panel = this.panel?.el?.nativeElement;
+
+    if (panel) {
+      return panel.getBoundingClientRect();
+    } else {
+      return new DOMRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+  }
+
   updateView() {
     if (this.inited) {
       return;
@@ -340,8 +324,6 @@ export class XlWndComponent {
       const clientRect = panel.getBoundingClientRect();
       width = clientRect.width;
       height = clientRect.height;
-      this.panelTop = clientRect.top;
-      this.panelLeft = clientRect.left;
     } else {
       width = window.innerWidth;
       height = window.innerHeight;
@@ -351,6 +333,7 @@ export class XlWndComponent {
   }
 
   ngAfterViewInit() {
+
     if (this.panel) {
       this.resizeBorder.nativeElement.style.position = "absolute";
     } else {
@@ -359,16 +342,12 @@ export class XlWndComponent {
     this.updateView();
   }
   inited = false;
-  ngDoCheck() {
-    this.updateView();
-  }
-
-  panelLeft = 0;
-  panelTop = 0;
-
+  
   constructor(
     @Self() private resizeBorder: ElementRef,
     @Optional() private panel: XlWndLimitCompoent,
-  ) { }
+  ) {
+    this.listener = IXlListener.create(panel?.el?.nativeElement);
+  }
 
 }
