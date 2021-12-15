@@ -46,10 +46,10 @@ export class XlAnchorGroupComponent implements OnInit, IXlAnchorGroup, OnDestroy
     let scrollTotal = scrollHeight - count;
     let pen = scrollTop / scrollTotal;
 
-    let viewPos = pen * count + this.xlTopOffset;
+    // let viewPos = pen * count + this.xlTopOffset;
     let realPos = pen * scrollHeight + this.xlTopOffset;
 
-    this.linePos = viewPos + "px";
+    // this.linePos = viewPos + "px";
     this.realHeight = realPos;
 
     this.list.sort((a, b) => a.scrollRange[0] - b.scrollRange[0]);
@@ -78,7 +78,7 @@ export class XlAnchorGroupComponent implements OnInit, IXlAnchorGroup, OnDestroy
     return scrollTop;
   }
 
-  linePos = "200px";
+  // linePos = "200px";
 
   ngOnInit(): void {
     this.listener.on("scroll", this.onScroll.bind(this));
