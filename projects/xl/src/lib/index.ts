@@ -17,7 +17,9 @@ export * from "./fold";
 export * from "./process";
 export * from "./slider";
 export * from "./link";
-import{ XlLinkModule } from "./link";
+export * from "./anchor";
+import { XlAnchorModule } from "./anchor";
+import { XlLinkModule } from "./link";
 import { XlSilderModule } from "./slider";
 import { XlProcessModule } from "./process";
 import { XlFoldModule } from "./fold";
@@ -34,6 +36,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlAnchorModule,
     XlLinkModule,
     XlSilderModule,
     XlProcessModule,

@@ -1,50 +1,73 @@
 import { Component, OnInit, OnDestroy, ElementRef, HostListener, Input } from '@angular/core';
 import { IXlListener } from "../listener";
-import { Pass } from "../types/types";
+
+
+let topOffset = 120;
+
+interface ScrollElement {
+  scrollTop: number;
+  scrollBottom: number;
+  active(): void;
+  unactive(): void;
+}
 
 const listener = IXlListener.create();
-const listenerList: Pass<Event>[] = [];
 
-function startListen(handle: Pass<Event>) {
-  if (listenerList.length < 1) {
-    listener.on("scroll", (evt: Event) => {
-      for (const listener of listenerList) {
-        listener(evt);
-      }
-    });
+const elementList: ScrollElement[] = [];
+
+let activedElements: ScrollElement[] | null = null;
+
+function onScroll() {
+  let { scrollTop, clientHeight } = document.documentElement;
+
+  let boxTop = scrollTop + topOffset;
+  let boxBottom = scrollTop + clientHeight;
+
+  if (activedElements) {
+    for (const elt of activedElements) {
+      elt.unactive.call(elt);
+    }
   }
-  listenerList.push(handle);
+  activedElements = elementList.filter(i => ((i.scrollTop) <= (boxBottom - 30)) && (i.scrollBottom > (boxTop + 30)));
+
+  if (activedElements) {
+    for (const elt of activedElements) {
+      elt.active.call(elt);
+    }
+  }
 }
-function endListen(handle: Pass<Event>) {
-  let idx = listenerList.indexOf(handle);
-  if (idx >= 0) {
-    listenerList.splice(idx, 1);
+
+function startListen(element: ScrollElement) {
+  if (elementList.length < 1) {
+    listener.on("scroll", onScroll);
   }
-  if (listenerList.length < 1) {
+  elementList.push(element);
+}
+function endListen(element: ScrollElement) {
+  let idx = elementList.indexOf(element);
+  if (idx >= 0) {
+    elementList.splice(idx, 1);
+  }
+  if (elementList.length < 1) {
     listener.off("scroll");
   }
 }
-
-function inScope(s: number, d: number, scope: number) {
-  const start = d - scope;
-  const end = d + scope;
-  return s >= start && s <= end;
-}
-
-
 
 @Component({
   selector: 'xlLink,[xlLink]',
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss']
 })
-export class XlLinkComponent implements OnInit, OnDestroy {
+export class XlLinkComponent implements OnDestroy, ScrollElement {
 
   element?: HTMLElement;
 
   @Input()
   set xlLink(v: HTMLElement) {
     this.element = v;
+    if (this.inited) {
+      this.hockScroll();
+    }
   }
 
   @Input()
@@ -58,7 +81,7 @@ export class XlLinkComponent implements OnInit, OnDestroy {
 
   actived = false;
 
-  active(target: HTMLElement) {
+  active() {
     if (this.actived) {
       return;
     }
@@ -67,6 +90,7 @@ export class XlLinkComponent implements OnInit, OnDestroy {
     if (this.xlLinkActived && link) {
       link.classList.add(this.xlLinkActived);
     }
+    let target = this.element as HTMLElement;
     if (this.xlTargetActived && target) {
       target.classList.add(this.xlTargetActived);
     }
@@ -75,7 +99,7 @@ export class XlLinkComponent implements OnInit, OnDestroy {
     }
 
   }
-  unactive(target: HTMLElement) {
+  unactive() {
     if (!this.actived) {
       return;
     }
@@ -85,6 +109,7 @@ export class XlLinkComponent implements OnInit, OnDestroy {
     if (this.xlLinkActived && link) {
       link.classList.remove(this.xlLinkActived);
     }
+    let target = this.element as HTMLElement;
     if (this.xlTargetActived && target) {
       target.classList.remove(this.xlTargetActived);
     }
@@ -93,32 +118,29 @@ export class XlLinkComponent implements OnInit, OnDestroy {
   @HostListener("click")
   onClick() {
     if (this.element) {
-      window.scrollTo({ top: this.element.offsetTop });
-
+      window.scrollTo({ top: (this.element.offsetTop - topOffset )-30});
     }
   }
-
-
-
-  scrollHandle!: Pass<Event>;
-  onScroll(evt: Event) {
+  hockScroll() {
+    endListen(this);
     let target = this.element as HTMLElement;
     if (!target) {
       return;
     }
+    this.scrollTop = target.offsetTop;
+    this.scrollBottom = target.offsetTop + target.offsetHeight;
+    startListen(this);
+  }
+  scrollTop: number = 0;
+  scrollBottom: number = 0;
+  inited = false;
+  ngAfterViewInit() {
+    this.hockScroll();
+    this.inited = true;
+  }
 
-    if (inScope(document.documentElement.scrollTop, target.offsetTop, 120)) {
-      this.active(target);
-    } else {
-      this.unactive(target);
-    }
-  }
-  ngOnInit(): void {
-    this.scrollHandle = this.onScroll.bind(this);
-    startListen(this.scrollHandle);
-  }
   ngOnDestroy() {
-    endListen(this.scrollHandle);
+    endListen(this);
   }
   constructor(private link: ElementRef) { }
 }
