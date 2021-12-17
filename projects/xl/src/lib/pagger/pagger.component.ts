@@ -5,8 +5,8 @@ import { nextFrame } from "../tools";
 type Pagger = {
   index: number;
   text: string;
-  disabled?: boolean;
   checked?: boolean;
+  hidden?: boolean;
 }
 
 @Component({
@@ -39,10 +39,11 @@ export class XlPaggerComponent implements OnInit {
 
   count: number = 0;
   curr: number = 0;
-  paggers: Pagger[] = [];
+  list: Pagger[] = [
+
+  ];
 
   updateView() {
-    this.paggers = [];
     if (this.count < 1) {
       this.count = 1;
     }
@@ -52,83 +53,64 @@ export class XlPaggerComponent implements OnInit {
     if (this.curr < 1) {
       this.curr = 1;
     }
+
+    let start = this.curr - 5;
+    let end = this.curr + 5;
+    if (start < 2) {
+      start = 2;
+    }
+    if (end > this.count - 1) {
+      end = this.count - 1;
+    }
     
+    let indexes: number[] = [];
 
-    let idx = this.curr;
-    if (idx < 2) {
-      idx = 2;
+    if (this.curr != 1 && this.curr != this.count) {
+      indexes.push(this.curr);
     }
-    if (idx > (this.count - 1)) {
-      idx = this.count - 1;
-    }
-    if (idx < 2) {
-      this.left = true;
-      this.right = true;
-      return;
-    };
 
-    this.paggers.push({
-      index: idx,
-      text: `${idx}`,
-      disabled: true,
-      checked: idx == this.curr
-    });
-    let left = idx - 1;
-    let right = idx + 1;
-    for (; this.paggers.length < 5;) {
-      if (left > 1) {
-        this.paggers.unshift({
-          index: left,
-          text: `${left}`,
-          disabled: false,
-          checked: left == this.curr
-        });
-
+    let left = this.curr - 1;
+    let right = this.curr + 1;
+    for (; indexes.length < 5;) {
+      if (left >= start) {
+        indexes.unshift(left);
       }
-      if (right < this.count) {
-        this.paggers.push({
-          index: right,
-          text: `${right}`,
-          disabled: false,
-          checked: right == this.curr
-        });
+      if (right <= end) {
+        indexes.push(right);
       }
       left--;
       right++;
-      if (right >= this.count && left <= 1) {
+      if (right > end && left < start) {
         break;
       }
     }
 
-    if (this.paggers.length < 1) {
-      this.left = true;
-      this.right = true;
-      return;
+    for (let i = 0; i < indexes.length; i++) {
+      let idx = indexes[i];
+      let item = this.list[i];
+      item.index = idx;
+      item.text = `${idx}`;
+      item.checked = idx == this.curr;
+      item.hidden = false;
     }
-
-    let lst = this.paggers[this.paggers.length - 1];
-    if (lst.index >= this.count - 1) {
-      this.right = true;
-    } else {
-      this.right = false;
-    }
-
-    let fst = this.paggers[0];
-    if (fst.index <= 2) {
-      this.left = true;
-    } else {
-      this.left = false;
+    for (let i = indexes.length; i < this.list.length; i++) {
+      this.list[i].hidden = true;
     }
   }
 
-  get first() {
-    return this.curr == 1;
+  get right() {
+    if (this.list[4].hidden) {
+      return false;
+    }
+    return ((this.list[4].index) < this.count - 1);
   }
-  get last() {
-    return this.curr == this.count;
+  get left() {
+    if (this.list[4].hidden) {
+      return false;
+    }
+
+    return this.list[0].index > 2;
   }
-  right = false;
-  left = false;
   get onlyOne() {
     return this.count < 2;
   }
@@ -140,9 +122,25 @@ export class XlPaggerComponent implements OnInit {
     this.updateView();
   }
 
-  constructor() { }
 
   ngOnInit(): void {
+    for (let i = 0; i < 5; i++) {
+      this.list.push({
+        index: 0,
+        text: "",
+        checked: false,
+        hidden: false
+      });
+    }
+  }
+
+  toFirst() {
+    if (this.curr == 1) return;
+    this.toPage(1);
+  }
+  toLast() {
+    if (this.curr == this.count) return;
+    this.toPage(this.count);
   }
 
   toPage(index: number) {
@@ -161,16 +159,12 @@ export class XlPaggerComponent implements OnInit {
   }
   toNext() {
     let idx = this.curr + 1;
-    if (idx > this.count) {
-      return;
-    }
+    if (idx > this.count) return;
     this.toPage(idx);
   }
   toPrev() {
     let idx = this.curr - 1;
-    if (idx < 1) {
-      return;
-    }
+    if (idx < 1) return;
     this.toPage(idx);
   }
 }

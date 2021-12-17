@@ -1,8 +1,11 @@
-
-<div class="page-item" (click)="toPrev();" [class.disabled]="first" >上一页</div>
-<div class="page-item" (click)="toPage(1);" [class.checked]="curr == 1" [class.disabled]="first" >1</div>
-<div class="page-item"  [class.hide]="left"  >···</div>
-<div class="page-item" (click)="toPage(p.index);"  [class.checked]="p.checked" *ngFor="let p of paggers;" >{{p.text}}</div>
-<div class="page-item"   [class.hide]="right" >···</div>
-<div class="page-item" (click)="toPage(count);" [class.checked]="curr == count" [class.hide]="onlyOne" [class.disabled]="last" >{{count}}</div>
-<div class="page-item" (click)="toNext();" [class.disabled]="last" >下一页</div>
+<div class="page-item" [class.disabled]="curr == 1" (click)="toPrev();">上一页</div>
+<div class="page-item" [class.checked]="curr == 1" (click)="toFirst();">1</div>
+<div class="page-item dot" [class.hide]="!left">···</div>
+<div class="page-item" [class.hide]="list[0].hidden"  [class.checked]="list[0].checked" (click)="toPage(list[0].index);" >{{list[0].text}}</div>
+<div class="page-item" [class.hide]="list[1].hidden"  [class.checked]="list[1].checked" (click)="toPage(list[1].index);" >{{list[1].text}}</div>
+<div class="page-item" [class.hide]="list[2].hidden"  [class.checked]="list[2].checked" (click)="toPage(list[2].index);" >{{list[2].text}}</div>
+<div class="page-item" [class.hide]="list[3].hidden"  [class.checked]="list[3].checked" (click)="toPage(list[3].index);" >{{list[3].text}}</div>
+<div class="page-item" [class.hide]="list[4].hidden"  [class.checked]="list[4].checked" (click)="toPage(list[4].index);" >{{list[4].text}}</div>
+<div class="page-item dot" [class.hide]="!right">···</div>
+<div class="page-item" [class.hide]="count == 1" [class.checked]="curr == count"  (click)="toLast();" >{{count}}</div>
+<div class="page-item" [class.disabled]="curr == count" (click)="toNext();">下一页</div>
