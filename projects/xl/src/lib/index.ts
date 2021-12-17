@@ -18,6 +18,8 @@ export * from "./process";
 export * from "./slider";
 export * from "./link";
 export * from "./anchor";
+export * from "./pagger";
+import { XlPaggerModule } from "./pagger";
 import { XlAnchorModule } from "./anchor";
 import { XlLinkModule } from "./link";
 import { XlSilderModule } from "./slider";
@@ -36,6 +38,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlPaggerModule,
     XlAnchorModule,
     XlLinkModule,
     XlSilderModule,

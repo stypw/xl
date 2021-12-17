@@ -6,7 +6,7 @@ export function sleep(interval: number = 500) {
 
 export function nextFrame() {
     return new Promise<void>(s => {
-        window.requestAnimationFrame(()=>{
+        window.requestAnimationFrame(() => {
             s();
         });
     });

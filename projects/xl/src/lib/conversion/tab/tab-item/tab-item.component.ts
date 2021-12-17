@@ -8,5 +8,5 @@ import { XlConversionItemComponent } from "../../conversion.component";
 export class XlTabItemComponent extends XlConversionItemComponent { 
 
   @Input()
-  header:string = "";
+  xlTabItemHeader:string = "";
 }

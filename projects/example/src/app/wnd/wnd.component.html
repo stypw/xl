@@ -1,39 +1,31 @@
-
-  <a  href="wnd#normalwnd" >这是一个普通的弹窗</a>
-
-
-<div xlTab duration="300ms" class="wd-full ht-full">
-  <div xlTabItem header="示例" style="border: 1px solid #ccc;">
-    <div class="wd-full ht-full" style="overflow: auto;">
-  
-      <div class="wd-half ht-half" style="background-color: rgb(243, 228, 89);" xlWndLimit >
-        <div xlWnd show style="--width:300px;--height:250px;">
-          <div xlWndHeader class="fl-hor fl-center unselect" style="height: 50px;background-color: blue;color:white;">
-            <span>点击蓝色区域，可拖动窗口</span>
-          </div>
-          <div xlWndContent style="background-color: wheat;width:100%;height:100%;">
-            <div class="fl-ver fl-left fl-ver-center" style="height:100%;width:100%;background-color: turquoise ;color:white;padding:20px;">
-              <span>1、将鼠标移动到窗口的四边或者四角，可改变窗口大小</span>
-              <span>2、这是一个移动受限制的窗口，缩放和移动，都不能超出橙色窗口的限制</span>
-            </div>
+<div class="fl-hor">
+  <div class="fl-zoom-1">
+    <div class="fl-hor">
+      <button>显示普通的弹窗</button>
+      <button>显示受限制的弹窗</button>
+      <button>显示模态的弹窗</button>
+    </div>
+    <div style="background-color: rgb(243, 228, 89);height: 40vh;" xlWndLimit>
+      <div xlWnd show style="--width:300px;--height:250px;">
+        <div xlWndHeader class="fl-hor fl-center unselect" style="height: 50px;background-color: blue;color:white;">
+          <span>点击蓝色区域，可拖动窗口</span>
+        </div>
+        <div xlWndContent style="background-color: wheat;width:100%;height:100%;">
+          <div class="fl-ver fl-left fl-ver-center"
+            style="height:100%;width:100%;background-color: turquoise ;color:white;padding:20px;">
+            <span>1、将鼠标移动到窗口的四边或者四角，可改变窗口大小</span>
+            <span>2、这是一个移动受限制的窗口，缩放和移动，都不能超出橙色窗口的限制</span>
           </div>
         </div>
       </div>
     </div>
-   
+    <div style="width: 100%;height: 20vh;" xlTab xlConversionDuration="300ms">
+      <div style="background-color: #ccc;" xlTabItem xlTabItemHeader="wnd-example.component.ts">wnd-example.component.ts</div>
+      <div style="background-color: #ccc;" xlTabItem xlTabItemHeader="wnd-example.component.html">wnd-example.component.html</div>
+      <div style="background-color: #ccc;" xlTabItem xlTabItemHeader="wnd-example.component.scss">wnd-example.component.scss</div>
+    </div>
+ 
   </div>
-  <div xlTabItem header="代码" style="border: 1px solid #ccc;">
-      <pre>{{htmlCode}}</pre>
+  <div class="fl-zoom-0" style="width: 200px;">
   </div>
-  <div xlTabItem header="文档" style="border: 1px solid #ccc;">
-
-  </div>
-</div>
-
-<div class="wd-full ht-full" >
-
-</div>
-<h1 id="normalwnd">显示一个普通的弹窗</h1>
-<div class="wd-full ht-full" >
-
 </div>

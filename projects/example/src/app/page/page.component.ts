@@ -12,4 +12,7 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  count=100;
+  index = 5;
+
 }

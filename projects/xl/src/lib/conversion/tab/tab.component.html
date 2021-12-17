@@ -1,11 +1,11 @@
 <div class="tab-box">
    <div class="tab-header">
-      <div class="header-item" (click)="haderItemClick(item);" [class.actived]="item.index == curr" *ngFor="let item of list;">{{item.header}}</div>
+      <div class="header-item" (click)="haderItemClick(item);" [class.actived]="item.index == curr" *ngFor="let item of list;">{{item.xlTabItemHeader}}</div>
    </div>
    <div class="tab-content">
       <div class="cut-box">
          <div (transitionend)="onTransitionend();"  [class.toleft]="state=='LEFT'" [class.toright]="state=='RIGHT'"
-            class="conversion-box" [style.--duration]="duration">
+            class="conversion-box" [style.--duration]="xlConversionDuration">
             <div class="subitem" [class.show]="left==-1" style="order:0"></div>
             <ng-content></ng-content>
          </div>

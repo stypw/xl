@@ -2,6 +2,7 @@
 
 export type Nullable<T> = T | null;
 export type AcceptString<T> = T | string | null | undefined;
+
 export type Call = () => void;
 export type Pass<T> = (v: T) => void;
 

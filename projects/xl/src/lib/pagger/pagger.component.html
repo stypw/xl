@@ -1,0 +1,8 @@
+
+<div class="page-item" (click)="toPrev();" [class.disabled]="first" >上一页</div>
+<div class="page-item" (click)="toPage(1);" [class.checked]="curr == 1" [class.disabled]="first" >1</div>
+<div class="page-item"  [class.hide]="left"  >···</div>
+<div class="page-item" (click)="toPage(p.index);"  [class.checked]="p.checked" *ngFor="let p of paggers;" >{{p.text}}</div>
+<div class="page-item"   [class.hide]="right" >···</div>
+<div class="page-item" (click)="toPage(count);" [class.checked]="curr == count" [class.hide]="onlyOne" [class.disabled]="last" >{{count}}</div>
+<div class="page-item" (click)="toNext();" [class.disabled]="last" >下一页</div>

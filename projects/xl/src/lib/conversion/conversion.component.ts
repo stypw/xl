@@ -18,7 +18,7 @@ export type ConversionState = "RIGHT" | "LEFT" | "NONE";
 export abstract class XlConversionComponent<T extends IXlConversionItem> implements IXlConversionBox {
    
     @Input()
-    duration = "3000ms";
+    xlConversionDuration = "3000ms";
    
     state: ConversionState = "NONE";
 

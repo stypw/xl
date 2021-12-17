@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, Directive, forwardRef } from '@angular/core';
 import { IXlConversionInjection, XlConversionComponent } from "../conversion.component";
 
 import { IXlTabItem } from "./define";
@@ -13,7 +13,17 @@ import { IXlTabItem } from "./define";
 })
 export class XlTabComponent extends XlConversionComponent<IXlTabItem> {
 
-  haderItemClick(item:IXlTabItem){
+  haderItemClick(item: IXlTabItem) {
     this.setCurr(item.index);
   }
+
+  override xlConversionDuration = "300ms";
+}
+
+
+@Directive({
+  selector: "[xlTabHeaderItem]"
+})
+export class XlTabHeaderItemDirective {
+
 }
