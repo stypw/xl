@@ -19,6 +19,10 @@ export * from "./slider";
 export * from "./link";
 export * from "./anchor";
 export * from "./pagger";
+export * from "./datepicker";
+export * from "./colorpicker";
+import { XlColorpickerModule } from "./colorpicker";
+import { XlDatepickerModule } from "./datepicker";
 import { XlPaggerModule } from "./pagger";
 import { XlAnchorModule } from "./anchor";
 import { XlLinkModule } from "./link";
@@ -38,6 +42,8 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlColorpickerModule,
+    XlDatepickerModule,
     XlPaggerModule,
     XlAnchorModule,
     XlLinkModule,

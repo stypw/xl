@@ -8,7 +8,10 @@ import { IXlListener } from "../listener";
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
   outputs: ["valueChange"],
-  inputs: ["value", "max", "min", "step"]
+  inputs: ["value", "max", "min", "step"],
+  host:{
+    draggable:"false"
+  }
 })
 export class XlSliderComponent {
   unlisten() {

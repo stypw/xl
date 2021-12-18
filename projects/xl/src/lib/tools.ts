@@ -11,3 +11,19 @@ export function nextFrame() {
         });
     });
 }
+
+export function absolute(pos: [number, number], element: HTMLElement) {
+    const rect = element.getBoundingClientRect();
+    let [x, y] = pos;
+
+    x -= rect.x;
+    y -= rect.y;
+    if (x > rect.width) {
+        x = rect.width;
+    }
+    if (y > rect.height) {
+        y = rect.height;
+    }
+
+    return [x, y];
+}

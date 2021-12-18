@@ -1,0 +1,38 @@
+:host{
+    .color-panel{
+        width:255px;
+        height: 255px;
+        position: relative;
+        
+        background-image: 
+        linear-gradient(to top,#000,#f00),
+        linear-gradient(to right,#000,#0f0),
+        linear-gradient(to right,var(--color-b, #00f),var(--color-b, #00f))
+        ;
+        background-blend-mode:  screen;
+
+        .color-picker{
+            position: absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height: 20px;
+            border-radius: 10px;
+            border:1px solid white;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            cursor: pointer;
+            background-blend-mode: lighten;
+            .color-value{
+                width:2px;
+                height: 2px;
+                background-color: rgba(0,0,0,0.7);
+            }
+        }
+       
+    }
+}
