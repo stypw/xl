@@ -1,0 +1,32 @@
+
+.header-text{
+    font-weight: 700;
+    cursor: default;
+    &:hover{
+        color: rgb(17, 175, 248);
+    }
+}
+
+.data-item{
+    cursor: default;
+    &:hover{
+        color: rgb(17, 175, 248);
+    }
+    &.actived{
+        background-color: rgb(17, 175, 248);
+        color:white;
+    }
+}
+
+.arrow{
+    --color:#333;
+    width:18px;
+    height: 18px;
+    &:hover{
+        --color:rgb(17, 175, 248);
+    }
+}
+
+.prev{
+    transform: rotateY(180deg);
+}

@@ -27,7 +27,8 @@ export class AppComponent {
     { url: "table", text: "表格" },
     { url: "page", text: "分页" },
     { url: "datetimepicker", text: "时间选择器" },
-    { url: "colorpicker", text: "颜色选择器" }
+    { url: "colorpicker", text: "颜色选择器" },
+    { url: "svg", text: "SVG图片" },
   ]
 
 

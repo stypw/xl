@@ -1,7 +1,8 @@
 import { Directive, ElementRef } from '@angular/core';
+import { nextFrame } from "../tools";
 @Directive({
     selector: '[xlFold]',
-    inputs: ["xlFold","duration"],
+    inputs: ["xlFold", "duration"],
     host: {
         "[style.transition-duration]": "duration",
         "[style.overflow]": "'hidden'",
@@ -15,6 +16,7 @@ export class XlFoldDirective {
 
     set xlFold(v: boolean) {
         this._xlFold = v;
+        if (!this.inited) return;
         if (!v) {
             this.unfold();
         } else {
@@ -26,41 +28,44 @@ export class XlFoldDirective {
 
     ontransitionend() {
         const view = this.el.nativeElement as HTMLElement;
-        const self = this;
         view.style.transitionProperty = "none";
-        if (!self._xlFold) {
-            window.requestAnimationFrame(() => {
-                view.style.maxHeight = "none";
-            });
+        
+        if (!this._xlFold) {
+            view.style.maxHeight = "none";
         }
     }
     async fold() {
-        const self = this;
-        const view = self.el.nativeElement as HTMLElement;
+        const view = this.el.nativeElement as HTMLElement;
         view.style.transitionProperty = "none";
 
+        await nextFrame();
+        view.style.transitionProperty = "max-height";
+        view.style.maxHeight = view.scrollHeight + "px";
 
-        window.requestAnimationFrame(() => {
-            view.style.transitionProperty = "max-height";
-            view.style.maxHeight = view.scrollHeight + "px";
-            window.requestAnimationFrame(() => {
-                view.style.maxHeight = "0px";
-            });
-        });
-
+        await nextFrame();
+        view.style.maxHeight = "0px";
     }
     async unfold() {
-        const self = this;
-
-        const view = self.el.nativeElement as HTMLElement;
+        const view = this.el.nativeElement as HTMLElement;
         view.style.transitionProperty = "none";
-        window.requestAnimationFrame(() => {
-            view.style.transitionProperty = "max-height";
-            view.style.maxHeight = "0px";
-            window.requestAnimationFrame(() => {
-                view.style.maxHeight = view.scrollHeight + "px";
-            });
-        });
+
+        await nextFrame();
+        view.style.transitionProperty = "max-height";
+        view.style.maxHeight = "0px";
+
+        await nextFrame();
+        view.style.maxHeight = view.scrollHeight + "px";
+    }
+
+    inited = false;
+    async ngAfterViewInit() {
+        await nextFrame();
+        if (!this._xlFold) {
+            await this.unfold();
+        } else {
+            await this.fold();
+        }
+        this.inited = true;
     }
 
     constructor(private el: ElementRef) { }

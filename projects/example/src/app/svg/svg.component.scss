@@ -1,0 +1,11 @@
+:host{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.svg-item{
+    padding:5px 10px;
+}

@@ -1,0 +1,33 @@
+:host{
+  position: relative;
+}
+
+.selector-panel{
+    position: absolute;
+    left:0px;
+    top:100%;
+    width:auto;
+    height: auto;
+}
+.selector-content{
+    position: relative;
+    
+}
+.optional{
+    position: absolute;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    &.show{
+        pointer-events: all;
+        opacity: 1;
+    }
+}
+.date-selector{
+    z-index: 1;
+    display: inline;
+}

@@ -1,1 +1,10 @@
-<div >Hello World!</div>
+<input type="text" />
+<div class="selector-panel">
+    <div class="selector-content" >
+
+        <div class="optional" [class.show]="panelType=='YEAR'" xlYearSelector></div>
+        <div class="optional" [class.show]="panelType=='MONTH'" xlMonthSelector></div>
+        <div class="date-selector" xlDateSelector></div>
+        <div xlTimeSelector></div>
+    </div>
+</div>

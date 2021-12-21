@@ -1,0 +1,21 @@
+<div xlSelectorPanel>
+    <div class="header" xlSelectorPanelHeader>
+        <div class="fl-zoom-0" (click)="toPrevGroup();">
+
+            <div class="prev arrow" xlSvg="next"></div>
+
+        </div>
+        <div (click)="yearClick();" class="header-text" >{{year}}年</div>
+        <div class="fl-zoom-0" (click)="toNextGroup();">
+            <div class="arrow" xlSvg="next"></div>
+        </div>
+    </div>
+    <div xlSelectorPanelContent>
+
+        <div class="year-group" *xlRepeat="let i max 4;">
+            <div (click)="yearItemClick(start+(i*4)+j);" [class.actived]="(start+(i*4)+j)==year" class="year-item data-item" *xlRepeat="let j max 3;">
+                {{start+(i*4)+j}}
+            </div>
+        </div>
+    </div>
+</div>

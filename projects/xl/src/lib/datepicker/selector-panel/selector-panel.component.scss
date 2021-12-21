@@ -1,0 +1,24 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+    border:1px solid #ccc;
+    
+}
+.panel-header{
+    border-bottom: 1px solid #ccc;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.panel-content{
+}
+
+

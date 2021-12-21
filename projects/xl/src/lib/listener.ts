@@ -14,6 +14,7 @@ export interface CanListen {
 }
 
 
+
 type ListenerSet = {
     [type: string]: EventListenerOrEventListenerObject;
 }
@@ -60,3 +61,4 @@ export namespace IXlListener {
         return new XlListener(element);
     }
 }
+

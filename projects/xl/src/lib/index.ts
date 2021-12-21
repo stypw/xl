@@ -21,6 +21,8 @@ export * from "./anchor";
 export * from "./pagger";
 export * from "./datepicker";
 export * from "./colorpicker";
+export * from "./repeat";
+import { XlRepeatModule } from "./repeat";
 import { XlColorpickerModule } from "./colorpicker";
 import { XlDatepickerModule } from "./datepicker";
 import { XlPaggerModule } from "./pagger";
@@ -42,6 +44,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlRepeatModule,
     XlColorpickerModule,
     XlDatepickerModule,
     XlPaggerModule,

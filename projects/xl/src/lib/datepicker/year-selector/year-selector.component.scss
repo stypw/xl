@@ -1,0 +1,44 @@
+
+:host{
+    background-color: white;
+}
+
+.year-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-top: 1px solid #ccc;
+    &:first-child{
+        border-top: none;
+    }
+}
+.year-item{
+    padding:2px 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;    
+    font-size: 14px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    border-left: 1px solid #ccc;
+
+
+    &:first-child{
+        border-left: none;
+    }
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    padding:0px 5px;
+}

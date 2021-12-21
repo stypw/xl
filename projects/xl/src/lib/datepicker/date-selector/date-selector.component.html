@@ -1,0 +1,45 @@
+<div xlSelectorPanel class="date-selector">
+    <div class="date-header" xlSelectorPanelHeader>
+        <div class="fl-zoom-0" (click)="toPrevYear();">
+            <div class="prev arrow" xlSvg="next" ></div>
+        </div>
+        <div class="fl-zoom-0" (click)="toPrevMonth();">
+            <div class="prev arrow" xlSvg="next0" ></div>
+        </div>
+        <div class="fl-zoom-1 text-area" >
+            <div class="header-text" (click)="yearClick();">{{yearNumber}}年</div>
+            <div class="header-text" (click)="monthClick();">{{monthNumber}}月</div>
+        </div>
+        <div class="fl-zoom-0" (click)="toNextMonth();">
+            <div xlSvg="next0" class="arrow" ></div>
+        </div>
+        <div class="fl-zoom-0" (click)="toNextYear();">
+            <div xlSvg="next" class="arrow" ></div>
+        </div>
+    </div>
+    <div class="date-content" xlSelectorPanelContent>
+        <div class="week-bar">
+            <div class="week-day">一</div>
+            <div class="week-day">二</div>
+            <div class="week-day">三</div>
+            <div class="week-day">四</div>
+            <div class="week-day">五</div>
+            <div class="week-day">六</div>
+            <div class="week-day">日</div>
+        </div>
+        <div class="one-month">
+            <div class="one-week" *xlRepeat="let i min 0;max:5;">
+
+                <ng-container *xlRepeat="let j min 0;max:6;">
+                    <div [class.prev-month]="oneMonth[i][j].dateType=='PREVMONTH'"
+                        [class.curr-month]="oneMonth[i][j].dateType=='CURRMONTH'"
+                        [class.next-month]="oneMonth[i][j].dateType=='NEXTMONTH'" [class.actived]="oneMonth[i][j].actived" (click)="dateClick(oneMonth[i][j]);"
+                        class="one-day data-item"  [title]="">
+                        {{oneMonth[i][j].text}}
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+    </div>
+</div>
