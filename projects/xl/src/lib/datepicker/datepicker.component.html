@@ -4,7 +4,7 @@
 
         <div class="optional" [class.show]="panelType=='YEAR'" xlYearSelector></div>
         <div class="optional" [class.show]="panelType=='MONTH'" xlMonthSelector></div>
-        <div class="date-selector" xlDateSelector></div>
+        <div class="date-selector" [class.show]="panelType=='DATE'" xlDateSelector></div>
         <div xlTimeSelector></div>
     </div>
 </div>

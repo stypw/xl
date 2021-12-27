@@ -1,0 +1,19 @@
+<div class="fl-hor">
+  <div class="left">
+    <a class="menu-item fl-hor fl-left fl-ver-center" *ngFor="let m of menus;" [routerLink]="m.url"
+      routerLinkActive="actived">{{m.text}}</a>
+  </div>
+  <div class="content fl-ver fl-top fl-hor-center">
+    <div class="menu-title-area fl-hor fl-center">
+      <a class="menu-title fl-hor fl-hor-center fl-ver-center" *ngFor="let m of menus;" [routerLink]="m.url"
+        routerLinkActive="actived">{{m.text}}</a>
+    </div>
+    <div class="wd-full">
+      <div class="wd-full" style="padding:20px;">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </div>
+
+</div>

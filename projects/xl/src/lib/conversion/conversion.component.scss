@@ -19,10 +19,6 @@
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
-
-            
-          
-
             &.toleft{
                 transition: left var(--duration,3000ms);
                 left:-200%;

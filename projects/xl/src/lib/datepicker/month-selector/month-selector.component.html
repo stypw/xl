@@ -1,1 +1,21 @@
-month-selector works!
+<div xlSelectorPanel>
+    <div class="header" xlSelectorPanelHeader>
+        <div class="fl-zoom-0" >
+
+            <div class="prev arrow" xlSvg="next"></div>
+
+        </div>
+        <div  class="header-text" >{{year}}年</div>
+        <div class="fl-zoom-0">
+            <div class="arrow" xlSvg="next"></div>
+        </div>
+    </div>
+    <div xlSelectorPanelContent>
+
+        <div class="data-group" *xlRepeat="let i max 3;">
+            <div  class="data-item" [class.actived]="monthes[i][j].month == month " (click)="monthClick(monthes[i][j]);"  *xlRepeat="let j max 2;">
+                {{monthes[i][j].text}}
+            </div>
+        </div>
+    </div>
+</div>

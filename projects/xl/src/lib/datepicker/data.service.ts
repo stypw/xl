@@ -28,7 +28,7 @@ export class DatetimeDateService {
     minute: number;
     second: number;
 
-    panelType: PanelType = "YEAR";
+    panelType: PanelType = "MONTH";
 
     setValue(year: number, month: number, date?: number, hour?: number, minute?: number, second?: number) {
 
@@ -51,6 +51,16 @@ export class DatetimeDateService {
 
     setPanel(type: PanelType) {
         this.panelType = type;
+    }
+
+    setMonth(m: number) {
+        if (m < monthMin || m > monthMax) return;
+        let change = false;
+        if (this.month != m) {
+            change = true;
+        }
+        this.month = m;
+        if (change) this.triggerMonthChange();
     }
 
     setData(year: number, month: number, date?: number, hour?: number, minute?: number, second?: number) {

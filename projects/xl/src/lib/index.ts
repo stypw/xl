@@ -22,6 +22,12 @@ export * from "./pagger";
 export * from "./datepicker";
 export * from "./colorpicker";
 export * from "./repeat";
+export * from "./recursion";
+export * from "./table";
+export * from "./menu-switch";
+import { XlMenuSwitchModule } from "./menu-switch";
+import { XlTableModule } from "./table";
+import { XlRecursionModule } from "./recursion";
 import { XlRepeatModule } from "./repeat";
 import { XlColorpickerModule } from "./colorpicker";
 import { XlDatepickerModule } from "./datepicker";
@@ -44,6 +50,9 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlMenuSwitchModule,
+    XlTableModule,
+    XlRecursionModule,
     XlRepeatModule,
     XlColorpickerModule,
     XlDatepickerModule,

@@ -1,74 +1,41 @@
 
+$headerHeight:4rem;
+$footerHeight:2rem;
+
 :host{
-    $headerHeight:64px;
-    $footerHeight:36px;
-    $leftWidth:270px;
-    .header{
-        height:$headerHeight;
-        background-color: #1976d2;
-        position: sticky;
-        top:0px;
-    }
-    .main{
-        .left{
-            position: sticky;
-            top: $headerHeight;
-            width:$leftWidth;
-            height: calc(100vh - #{$headerHeight} - #{$footerHeight});
-            background-color: rgb(250, 250, 250);
-            padding-top: 48px;
-            overflow: auto;
-            .menu-item{
-                padding-left:24px;
-                height:48px;
-                width:100%;
-                color:rgba(0,0,0,0.65);
-                text-decoration: none;
-                font-size: 16px;
-                &.actived{
-                   color:rgb(63, 81, 181);
-                   background-color: rgba(63, 81, 181, 0.15); 
-                }
-            }
-        }
-        .content{
-            width:calc(100% - #{$leftWidth});
-            .menu-title-area{
-                position: sticky;
-                top: $headerHeight;
-                height: 48px;
-                box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.1);
-                background-color: white;
-            }
-            .menu-title{
-                display: none;
-                padding-left:24px;
-                height:48px;
-                width:100%;
-                color:rgba(0,0,0,0.65);
-                text-decoration: none;
-                font-size: 16px;
-                &.actived{
-                    display: flex;
-                    pointer-events: none;
-                }
-            }
-        }
-    }
-    .footer{
-        position: sticky;
-        bottom: 0px;
-        height: $footerHeight;
-        background-color: #333;
+    padding-top: $headerHeight;
+    padding-bottom: $footerHeight;
+}
+
+.header{
+    position: fixed;
+    left:0rem;
+    top:0rem;
+    right:0rem;
+    height:$headerHeight;
+    background-color: #1976d2;
+    box-shadow: 1px 1px 6px 1px #1976d260;
+}
+
+
+
+.footer{
+    position: fixed;
+    left:0rem;
+    height: $footerHeight;
+    right:0rem;
+    bottom: 0rem;
+    
+    background-color: #333;
+    color:#ccc;
+    padding-left:10%;
+    padding-right: 10%;
+    a{
+        text-decoration: none;
         color:#ccc;
-        padding-left:10%;
-        padding-right: 10%;
-        a{
-            text-decoration: none;
-            color:#ccc;
-            &:hover{
-                text-decoration: underline;
-            }
+        &:hover{
+            text-decoration: underline;
         }
     }
 }
+

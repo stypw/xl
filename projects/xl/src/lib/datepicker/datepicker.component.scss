@@ -29,5 +29,11 @@
 }
 .date-selector{
     z-index: 1;
-    display: inline;
+    display: flex;
+    pointer-events: none;
+    opacity: 0;
+    &.show{
+        pointer-events: all;
+        opacity: 1;
+    }
 }

@@ -1,37 +1,23 @@
-<div class="header fl-hor" style="color: #eee;">
+<div class="header fl-hor fl-ver-center" style="color: #eee;padding-right: 5%;">
   <div class="fl-hor fl-center" style="width: 270px;">
     <h2>Xl</h2>
     <h4>-轻量的Angular组件库</h4>
   </div>
-  <div class="fl-zoom-1 fl-hor fl-left fl-bottom" style="padding-bottom: 15px;"  >
+  <div class="fl-zoom-1 fl-hor fl-right fl-ver-center">
   </div>
-  
+  <div class="fl-hor col-gap-10 ">
+    <a [routerLink]="['start']">开始使用</a>
+    <a [routerLink]="['theme']">设计规范</a>
+    <a [routerLink]="['components']">组件库</a>
+  </div>
+ 
 </div>
-<div class="main fl-hor">
-  <div class="left">
-    <a class="menu-item fl-hor fl-left fl-ver-center" *ngFor="let m of menus;" [routerLink]="m.url"
-      routerLinkActive="actived">{{m.text}}</a>
-  </div>
-  <div class="content">
-
-    <div class="fl-zoom-0 menu-title-area">
-      <a class="menu-title fl-hor fl-left fl-ver-center" *ngFor="let m of menus;" [routerLink]="m.url"
-        routerLinkActive="actived">{{m.text}}</a>
-    </div>
-    <div class="wd-full">
-      <div class="wd-full" style="padding:10px;">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-<div class="footer fl-hor fl-hor-between fl-ver-center hor-gap-10">
+<router-outlet></router-outlet>
+<div class="footer fl-hor fl-hor-between fl-ver-center">
   <a class="fl-hor fl-center" target="_blank"
     href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52010302002539">
-    <img src="/assets/images/beian.png" />
-    <ng-container>贵公网安备 52010302002539号</ng-container>
+    <img src="assets/images/beian.png" />
+    <span>贵公网安备 52010302002539号</span>
   </a>
 
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
@@ -40,7 +26,7 @@
 
   <a style="text-decoration: none;" href="https://github.com/stypw/xl" target="__blank">
     <span class="fl-hor fl-center">
-      <img style="width:22px;height:22px;" src="/assets/images/github-circle-white-transparent.svg" />
+      <img style="width:22px;height:22px;" src="assets/images/github-circle-white-transparent.svg" />
       <span>&nbsp;GitHub</span>
     </span>
   </a>

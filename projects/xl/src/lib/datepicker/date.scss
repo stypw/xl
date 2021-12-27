@@ -7,6 +7,20 @@
     }
 }
 
+
+.data-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-top: 1px solid #ccc;
+    &:first-child{
+        border-top: none;
+    }
+}
+
+
 .data-item{
     cursor: default;
     &:hover{

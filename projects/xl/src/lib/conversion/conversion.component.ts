@@ -168,6 +168,12 @@ export class XlConversionItemComponent implements IXlConversionItem {
     @HostBinding("style.order")
     order: number = 0;
 
+    @HostBinding("style.display")
+    get display(){
+        if(this.order == 4)return "none";
+        return "flex";
+    }
+
     constructor(
         @Inject(IXlConversionInjection)xlConversionBox: IXlConversionBox
     ) {

@@ -1,0 +1,117 @@
+
+$defaultColor:#000;
+
+@keyframes xlMenuSwitchBarOneToOpen{
+    0%{
+        opacity: 1;
+        transform:translateY(300px) rotateZ(0deg);
+    }
+    50%{
+        opacity: 0;
+        transform:translateY(0px) rotateZ(0deg);
+    }
+    100%{
+        opacity: 1;
+        transform:translateY(0px) rotateZ(45deg);
+    }
+}
+@keyframes xlMenuSwitchBarOneToClose{
+    0%{
+        opacity: 1;
+        transform:translateY(0px) rotateZ(45deg);
+    }
+    50%{
+        opacity: 0;
+        transform:translateY(0px) rotateZ(0deg);
+    }
+    100%{
+        opacity: 1;
+        transform:translateY(300px) rotateZ(0deg);
+    }
+}
+.xl-menu-switch-bar-1{
+    fill:var(--color,$defaultColor);
+    transform:translateY(300px) rotateZ(0deg);
+    transform-origin: center;
+    &.xl-menu-switch-open{
+      animation:xlMenuSwitchBarOneToOpen 600ms 1 forwards;  
+    }
+    &.xl-menu-switch-close{
+        animation:xlMenuSwitchBarOneToClose 600ms 1 forwards;
+    }
+}
+
+
+@keyframes xlMenuSwitchBarTwoToOpen{
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@keyframes xlMenuSwitchBarTwoToClose{
+  
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.xl-menu-switch-bar-2{
+    fill:var(--color,$defaultColor);
+    &.xl-menu-switch-open{
+      animation:xlMenuSwitchBarTwoToOpen 600ms 1 forwards;  
+    }
+    &.xl-menu-switch-close{
+        animation:xlMenuSwitchBarTwoToClose 600ms 1 forwards;
+    }
+}
+
+
+@keyframes xlMenuSwitchBarThreeToOpen{
+    0%{
+        opacity: 1;
+        transform:translateY(-300px) rotateZ(0deg);
+    }
+    50%{
+        opacity: 0;
+        transform:translateY(0px) rotateZ(0deg);
+    }
+    100%{
+        opacity: 1;
+        transform:translateY(0px) rotateZ(-45deg);
+    }
+}
+@keyframes xlMenuSwitchBarThreeToClose{
+    0%{
+        opacity: 1;
+        transform:translateY(0px) rotateZ(-45deg);
+    }
+    50%{
+        opacity: 0;
+        transform:translateY(0px) rotateZ(0deg);
+    }
+    100%{
+        opacity: 1;
+        transform:translateY(-300px) rotateZ(0deg);
+    }
+}
+.xl-menu-switch-bar-3{
+    fill:var(--color,$defaultColor);
+    transform:translateY(-300px) rotateZ(0deg);
+    transform-origin: center;
+    &.xl-menu-switch-open{
+      animation:xlMenuSwitchBarThreeToOpen 600ms 1 forwards;  
+    }
+    &.xl-menu-switch-close{
+        animation:xlMenuSwitchBarThreeToClose 600ms 1 forwards;
+    }
+}

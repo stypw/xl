@@ -1,0 +1,45 @@
+:host{
+    width: auto;
+}
+.table{
+    border:1px solid #ccc;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+}
+
+
+.header-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-left: 1px solid #ccc;
+    box-sizing: border-box;
+    &.first{border-left: none;}
+    &.last{}
+    &.odd{}
+    &.even{}
+    padding:10px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+
+.cell{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    border-left: 1px solid #ccc;
+    box-sizing: border-box;
+    &.first{border-left: none;}
+    padding:5px 10px;
+    font-size: 0.7rem;
+    border-top: 1px solid #ccc;
+    &.first-row{
+        // border-top: none;
+
+    }
+}
