@@ -11,13 +11,10 @@ export class XlMenuSwitchComponent implements OnInit {
     this._open = v;
   }
   get open() {
-    return this._open;
+    return this._open || false;
   }
   @Output()
   openChange = new EventEmitter<boolean>();
-
-  @Input()
-  duration = "600ms";
 
   @HostListener("click")
   onClick() {
@@ -25,7 +22,7 @@ export class XlMenuSwitchComponent implements OnInit {
     this.openChange.emit(this._open);
   }
 
-  _open = false;
+  _open?: boolean;
   constructor() { }
   ngOnInit(): void {
   }

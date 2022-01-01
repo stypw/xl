@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  isOpen = false;
   ngOnInit(){
     if (typeof Worker !== 'undefined') {
       // Create a new

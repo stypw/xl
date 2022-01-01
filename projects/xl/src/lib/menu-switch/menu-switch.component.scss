@@ -1,6 +1,7 @@
 
 $defaultColor:#000;
 
+
 @keyframes xlMenuSwitchBarOneToOpen{
     0%{
         opacity: 1;
@@ -30,14 +31,16 @@ $defaultColor:#000;
     }
 }
 .xl-menu-switch-bar-1{
-    fill:var(--color,$defaultColor);
     transform:translateY(300px) rotateZ(0deg);
-    transform-origin: center;
     &.xl-menu-switch-open{
-      animation:xlMenuSwitchBarOneToOpen 600ms 1 forwards;  
+        opacity: 1;
+        transform:translateY(0px) rotateZ(45deg);
+        animation-name:xlMenuSwitchBarOneToOpen;
     }
     &.xl-menu-switch-close{
-        animation:xlMenuSwitchBarOneToClose 600ms 1 forwards;
+        opacity: 1;
+        transform:translateY(300px) rotateZ(0deg);
+        animation-name:xlMenuSwitchBarOneToClose;
     }
 }
 
@@ -66,12 +69,13 @@ $defaultColor:#000;
     }
 }
 .xl-menu-switch-bar-2{
-    fill:var(--color,$defaultColor);
     &.xl-menu-switch-open{
-      animation:xlMenuSwitchBarTwoToOpen 600ms 1 forwards;  
+        opacity: 0;
+        animation-name:xlMenuSwitchBarTwoToOpen ;  
     }
     &.xl-menu-switch-close{
-        animation:xlMenuSwitchBarTwoToClose 600ms 1 forwards;
+        opacity: 1;
+        animation-name:xlMenuSwitchBarTwoToClose ;
     }
 }
 
@@ -105,13 +109,21 @@ $defaultColor:#000;
     }
 }
 .xl-menu-switch-bar-3{
-    fill:var(--color,$defaultColor);
     transform:translateY(-300px) rotateZ(0deg);
-    transform-origin: center;
     &.xl-menu-switch-open{
-      animation:xlMenuSwitchBarThreeToOpen 600ms 1 forwards;  
+        opacity: 1;
+        transform:translateY(0px) rotateZ(-45deg);
+        animation-name:xlMenuSwitchBarThreeToOpen;  
     }
     &.xl-menu-switch-close{
-        animation:xlMenuSwitchBarThreeToClose 600ms 1 forwards;
+        opacity: 1;
+        transform:translateY(-300px) rotateZ(0deg);
+        animation-name:xlMenuSwitchBarThreeToClose;
     }
+}
+.xl-menu-switch-bar-1,.xl-menu-switch-bar-2,.xl-menu-switch-bar-3{
+    transform-origin: center;
+    fill:var(--color,$defaultColor);
+    animation-duration: var(--duration,600ms);
+    animation-iteration-count: 1;
 }

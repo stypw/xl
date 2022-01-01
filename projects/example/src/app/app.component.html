@@ -1,5 +1,9 @@
 <div class="header fl-hor fl-ver-center" style="color: #eee;padding-right: 5%;">
-  <div class="fl-hor fl-center" style="width: 270px;">
+  <div class="fl-hor fl-center fl-left" style="width: 270px;">
+    <div style="padding:0rem 1rem;" >
+
+      <div xlMenuSwitch [(open)]="isOpen" style="width: 25px;height:25px;--color:white;--duration:300ms;" ></div>
+    </div>
     <h2>Xl</h2>
     <h4>-轻量的Angular组件库</h4>
   </div>
@@ -9,8 +13,10 @@
     <a [routerLink]="['start']">开始使用</a>
     <a [routerLink]="['theme']">设计规范</a>
     <a [routerLink]="['components']">组件库</a>
+    <span>&nbsp;{{isOpen}}&nbsp;</span>
   </div>
  
+
 </div>
 <router-outlet></router-outlet>
 <div class="footer fl-hor fl-hor-between fl-ver-center">

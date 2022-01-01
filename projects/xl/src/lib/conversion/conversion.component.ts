@@ -16,10 +16,10 @@ export type ConversionState = "RIGHT" | "LEFT" | "NONE";
     selector: "[xlConversion]"
 })
 export abstract class XlConversionComponent<T extends IXlConversionItem> implements IXlConversionBox {
-   
+
     @Input()
     xlConversionDuration = "3000ms";
-   
+
     state: ConversionState = "NONE";
 
     curr = 0;
@@ -91,7 +91,7 @@ export abstract class XlConversionComponent<T extends IXlConversionItem> impleme
         if (idx < 0 || idx >= this.count) {
             return;
         }
-        let state:ConversionState = "NONE";
+        let state: ConversionState = "NONE";
         if (idx > this.curr) {
             this.right = idx;
             state = "LEFT";
@@ -139,10 +139,10 @@ export abstract class XlConversionComponent<T extends IXlConversionItem> impleme
         this.updateOrders();
     }
 
-    list:T[] = [];
+    list: T[] = [];
     get count() {
         return this.list.length;
-    } 
+    }
 
     async ngAfterViewInit() {
         await nextFrame();
@@ -162,20 +162,20 @@ export abstract class XlConversionComponent<T extends IXlConversionItem> impleme
     selector: 'xlConversionItem,[xlConversionItem]'
 })
 export class XlConversionItemComponent implements IXlConversionItem {
-    
+
     readonly index: number;
 
     @HostBinding("style.order")
     order: number = 0;
 
     @HostBinding("style.display")
-    get display(){
-        if(this.order == 4)return "none";
+    get display() {
+        if (this.order == 4) return "none";
         return "flex";
     }
 
     constructor(
-        @Inject(IXlConversionInjection)xlConversionBox: IXlConversionBox
+        @Inject(IXlConversionInjection) xlConversionBox: IXlConversionBox
     ) {
         this.index = xlConversionBox.addItem(this);
     }
