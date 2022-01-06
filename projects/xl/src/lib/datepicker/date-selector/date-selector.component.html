@@ -1,20 +1,20 @@
 <div xlSelectorPanel>
     <div class="date-header" xlSelectorPanelHeader>
         <div class="fl-zoom-0" (click)="toPrevYear();">
-            <div class="prev arrow" xlSvg="next" ></div>
+            <div class="prev arrow" [xlSvg]="next1" ></div>
         </div>
         <div class="fl-zoom-0" (click)="toPrevMonth();">
-            <div class="prev arrow" xlSvg="next0" ></div>
+            <div class="prev arrow" [xlSvg]="next" ></div>
         </div>
         <div class="fl-zoom-1 text-area" >
             <div class="header-text" (click)="yearClick();">{{yearNumber}}年</div>
             <div class="header-text" (click)="monthClick();">{{monthNumber}}月</div>
         </div>
         <div class="fl-zoom-0" (click)="toNextMonth();">
-            <div xlSvg="next0" class="arrow" ></div>
+            <div [xlSvg]="next" class="arrow" ></div>
         </div>
         <div class="fl-zoom-0" (click)="toNextYear();">
-            <div xlSvg="next" class="arrow" ></div>
+            <div [xlSvg]="next1" class="arrow" ></div>
         </div>
     </div>
     <div class="date-content" xlSelectorPanelContent>

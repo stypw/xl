@@ -46,15 +46,19 @@ $lunk:1px dashed yellow;
                 left:-10px;
                 top:5px;
                 .expand{
-                    transform: rotateZ(0deg);
+                    transform: rotateZ(90deg);
                     transition: transform 300ms;
                     &.unexpand{
-                        transform: rotateZ(-90deg);
+                        transform: rotateZ(0deg);
                     }
                 }
             }
             .node-text{
-               
+               display: flex;
+               flex-direction: row;
+               justify-content: flex-start;
+               align-items: center;
+               align-content: center;
             }
         }
         .node-children{

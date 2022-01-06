@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatetimeDateService } from '../data.service';
-
+import { svgSet } from "../../svg";
 const yearCount = 20;
 
 @Component({
@@ -13,7 +13,7 @@ export class XlYearSelectorComponent implements OnInit {
   constructor(private dataService: DatetimeDateService) {
 
   }
-
+next = svgSet.xl_svg_next;
   start = 0;
 
   year = 0;

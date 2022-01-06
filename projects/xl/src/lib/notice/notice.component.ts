@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from "@angular/core";
-
+import { svgSet } from "../svg";
 import { sleep } from "../tools";
 import { Call, GetNumber, GetValue, SetValue } from "../types/types";
 
@@ -86,6 +86,8 @@ export class XlNoticeComponent {
     list: XlNoticeItem[] = [];
     last: XlNoticeItem | null = null;
     isShowLast = false;
+
+    close = svgSet.xl_svg_close;
 
     @HostBinding("class.show")
     show = false;

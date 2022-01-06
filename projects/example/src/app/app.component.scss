@@ -1,32 +1,62 @@
 
 $headerHeight:4rem;
 $footerHeight:2rem;
-
+$leftWidth:200px;
 :host{
-    padding-top: $headerHeight;
-    padding-bottom: $footerHeight;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 64px 1fr 40px;
+    grid-template-areas: 
+    "left header"
+    "left content"
+    "left footer"
+    ;
 }
 
 .header{
-    position: fixed;
-    left:0rem;
-    top:0rem;
-    right:0rem;
-    height:$headerHeight;
+    position: sticky;
+    top:0px;
+    grid-area: header;
     background-color: #1976d2;
     box-shadow: 1px 1px 6px 1px #1976d260;
-    
+}
+
+.left{
+    grid-area: left;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.1);
+    width:200px;
+    transition: width 300ms;
+    overflow: hidden;
+    &.close{
+        width:0px;
+    }
 }
 
 
+.menu-item{
+    width:200px;
+    padding-left:1em;
+    height:2rem;
+    color:rgba(0,0,0,0.65);
+    text-decoration: none;
+    font-size: 0.8rem;
+    &.actived{
+       color:rgb(63, 81, 181);
+       background-color: rgba(63, 81, 181, 0.15); 
+    } 
+}
+
+
+.content{
+    grid-area: content;
+    height: 100vh;
+}
+
 
 .footer{
-    position: fixed;
-    left:0rem;
-    height: $footerHeight;
-    right:0rem;
-    bottom: 0rem;
-    
+    grid-area: footer;
     background-color: #333;
     color:#ccc;
     padding-left:10%;
@@ -39,4 +69,5 @@ $footerHeight:2rem;
         }
     }
 }
+
 

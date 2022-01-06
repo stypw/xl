@@ -13,6 +13,8 @@ export interface HttpClass {
     deleteWithJson<T>(url: string, data: any): Promise<T | null>
 }
 
+
+
 export class HttpClass {
     requestSync(url: string, method: string, data: any): Promise<[string, any]> {
         method = method || 'get';

@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { XlSvgComponent } from "./svg.component";
+import { SvgComponent } from './svg.component';
+
+
 
 @NgModule({
-  declarations: [XlSvgComponent],
-  imports: [CommonModule],
-  exports: [XlSvgComponent]
+  declarations: [SvgComponent],
+  exports: [SvgComponent],
+  imports: [CommonModule]
 })
 export class XlSvgModule { }

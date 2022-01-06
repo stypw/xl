@@ -2,12 +2,12 @@
     <div class="header" xlSelectorPanelHeader>
         <div class="fl-zoom-0" (click)="toPrevGroup();">
 
-            <div class="prev arrow" xlSvg="next"></div>
+            <div class="prev arrow" [xlSvg]="next"></div>
 
         </div>
         <div (click)="yearClick();" class="header-text" >{{year}}年</div>
         <div class="fl-zoom-0" (click)="toNextGroup();">
-            <div class="arrow" xlSvg="next"></div>
+            <div class="arrow" [xlSvg]="next"></div>
         </div>
     </div>
     <div xlSelectorPanelContent>

@@ -1,4 +1,5 @@
 
-export * from "./svg.component";
 export * from "./svg.module";
-export * from "./svg-pathes";
+export * from "./svg.component";
+export * from "./define";
+export * as svgSet from "./iconfonts";

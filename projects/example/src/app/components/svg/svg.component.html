@@ -1,4 +1,7 @@
-<div  *ngFor="let svg of svgs;" class="fl-ver fl-center svg-item">
-    <div [xlSvg]="svg" style="height: 30px;width:30px;--color:blue;" ></div>
-    <div>{{svg}}</div>
+<div class="fl-hor fl-stack">
+
+    <div *ngFor="let svg of svgs;" class="fl-ver fl-center svg-item">
+        <div [xlSvg]="svg.d" style="height: 30px;width:30px;"></div>
+        <div style="font-size: 12px;max-width: 100%;" class="text-over">{{svg.k}}</div>
+    </div>
 </div>

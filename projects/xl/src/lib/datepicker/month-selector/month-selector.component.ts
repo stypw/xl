@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatetimeDateService } from '../data.service';
-
+import { svgSet } from "../../svg";
 type Month = {
   month: number;
   text: string;
@@ -17,6 +17,7 @@ export class XlMonthSelectorComponent implements OnInit {
 
 
   }
+  next = svgSet.xl_svg_next;
 
   monthes: Month[][] = [
     [{ month: 0, text: '一月' }, { month: 1, text: '二月' }, { month: 2, text: '三月' }],
@@ -29,6 +30,8 @@ export class XlMonthSelectorComponent implements OnInit {
     this.dataService.setMonth(month.month);
     this.dataService.setPanel("DATE");
   }
+
+  
 
   ngOnInit(): void {
   }

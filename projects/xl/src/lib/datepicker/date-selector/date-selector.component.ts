@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DatetimeDateService, daySpan } from "../data.service";
+import { svgSet } from "../../svg";
 
 type DateType = "PREVMONTH" | "CURRMONTH" | "NEXTMONTH";
 
@@ -22,6 +23,9 @@ type DateItem = {
 export class XlDateSelectorComponent implements OnInit {
 
   oneMonth: DateItem[][];
+
+  next = svgSet.xl_svg_next;
+  next1 = svgSet.xl_svg_next1;
 
   get yearNumber() {
     return this.dataService.year;

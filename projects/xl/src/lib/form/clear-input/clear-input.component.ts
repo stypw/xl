@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { IXlBinding } from "../../binding";
 import { sleep } from "../../tools";
+import { svgSet } from "../../svg";
 @Component({
   selector: 'xlClearInput,[xlClearInput]',
   templateUrl: './clear-input.component.html',
@@ -23,7 +24,8 @@ export class XlClearInputComponent {
       }
     }
   }
-
+  close = svgSet.xl_svg_close;
+  
   async onBlur() {
     this.inCtrl = false;
     await sleep(200);

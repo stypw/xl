@@ -2,7 +2,7 @@
     <div (click)="onItemClick(item);" class="item-panel">
         <div class="item-header">
             <div class="item-title">{{item.title}}</div>
-            <div (click)="onItemClose(item,$event);" class="item-close" xlSvg="close"></div>
+            <div (click)="onItemClose(item,$event);" class="item-close" [xlSvg]="close"></div>
         </div>
         <div class="item-content">
             {{item.content}}
