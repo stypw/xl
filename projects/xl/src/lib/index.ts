@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+export * from "./config";
 export * from "./types/types";
 export * from "./http"
 export * as tools from "./tools";

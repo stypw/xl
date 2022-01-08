@@ -1,4 +1,4 @@
-import { Routes } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Routes } from "@angular/router";
 import { CarouselComponent } from "./components/carousel/carousel.component";
 import { ColorpickerComponent } from "./components/colorpicker/colorpicker.component";
 import { ConversionComponent } from "./components/conversion/conversion.component";
@@ -16,6 +16,10 @@ import { TreeComponent } from "./components/tree/tree.component";
 import { WndComponent } from "./components/wnd/wnd.component";
 import { XlformComponent } from "./components/xlform/xlform.component";
 import { AnchorComponent } from "./components/anchor/anchor.component";
+import { Inject, Injectable } from "@angular/core";
+import { Title } from "@angular/platform-browser";
+import { configMapToken } from "@stypw/xl";
+
 export const routeComponents = [
     AnchorComponent,
     CarouselComponent,
@@ -36,24 +40,41 @@ export const routeComponents = [
     XlformComponent
 ];
 
+@Injectable()
+export class SetRouterTitleService implements CanActivate {
+    canActivate(
+        route: ActivatedRouteSnapshot
+    ) {
+        let t = route.data["title"];
+        if (t) {
+            let title = this.map.get("title");
+            if (title) {
+                this.titleService.setTitle(`${title}-${t}`)
+            }
+        }
+        return true;
+    }
+    constructor(private titleService: Title, @Inject(configMapToken) private map: Map<string, string>) { }
+}
+
 export const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "start" },
-    { path: "wnd", component: WndComponent },
-    { path: "loading", component: LoadingComponent },
-    { path: "toast", component: ToastComponent },
-    { path: "svg", component: SvgComponent },
-    { path: "notice", component: NoticeComponent },
-    { path: "form", component: XlformComponent },
-    { path: "tab", component: TabComponent },
-    { path: "carousel", component: CarouselComponent },
-    { path: "conversion", component: ConversionComponent },
-    { path: "tree", component: TreeComponent },
-    { path: "process", component: ProcessComponent },
-    { path: "slider", component: SliderComponent },
-    { path: "table", component: TableComponent },
-    { path: "page", component: PageComponent },
-    { path: "datetimepicker", component: DatetimepickerComponent },
-    { path: "colorpicker", component: ColorpickerComponent },
-    { path: "anchor", component: AnchorComponent },
+    { path: "wnd", component: WndComponent, canActivate: [SetRouterTitleService], data: { title: "弹窗" } },
+    { path: "loading", component: LoadingComponent, canActivate: [SetRouterTitleService], data: { title: "加载" } },
+    { path: "toast", component: ToastComponent, canActivate: [SetRouterTitleService], data: { title: "提示" } },
+    { path: "svg", component: SvgComponent, canActivate: [SetRouterTitleService], data: { title: "svg图片" } },
+    { path: "notice", component: NoticeComponent, canActivate: [SetRouterTitleService], data: { title: "消息" } },
+    { path: "form", component: XlformComponent, canActivate: [SetRouterTitleService], data: { title: "表单" } },
+    { path: "tab", component: TabComponent, canActivate: [SetRouterTitleService], data: { title: "标签" } },
+    { path: "carousel", component: CarouselComponent, canActivate: [SetRouterTitleService], data: { title: "轮播" } },
+    { path: "conversion", component: ConversionComponent, canActivate: [SetRouterTitleService], data: { title: "内容切换" } },
+    { path: "tree", component: TreeComponent, canActivate: [SetRouterTitleService], data: { title: "树" } },
+    { path: "process", component: ProcessComponent, canActivate: [SetRouterTitleService], data: { title: "进度条" } },
+    { path: "slider", component: SliderComponent, canActivate: [SetRouterTitleService], data: { title: "滑块" } },
+    { path: "table", component: TableComponent, canActivate: [SetRouterTitleService], data: { title: "表格" } },
+    { path: "page", component: PageComponent, canActivate: [SetRouterTitleService], data: { title: "分页" } },
+    { path: "datetimepicker", component: DatetimepickerComponent, canActivate: [SetRouterTitleService], data: { title: "时间选择器" } },
+    { path: "colorpicker", component: ColorpickerComponent, canActivate: [SetRouterTitleService], data: { title: "颜色选择器" } },
+    { path: "anchor", component: AnchorComponent, canActivate: [SetRouterTitleService], data: { title: "锚点" } },
     { path: "**", pathMatch: "full", redirectTo: "start" }
 ]

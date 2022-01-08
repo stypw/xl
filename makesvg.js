@@ -30,7 +30,7 @@ function readSvg(fileName) {
 async function makeSvgs() {
 
     const dir = fs.opendirSync(svgDir);
-    const arr = [`import { PathData } from "./define";`];
+    const arr = [`import { PathData } from "./define"`];
     while (true) {
         const d = dir.readSync();
         if (!d) break;

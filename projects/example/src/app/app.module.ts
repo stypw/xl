@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { XlModule } from "@stypw/xl";
+import { XlModule, configMapToken } from "@stypw/xl";
 import { AppComponent } from './app.component';
 
-import { routes,routeComponents } from "./app.routers.module";
-
+import { routes, routeComponents,SetRouterTitleService } from "./app.routers.module";
+import { appConfig } from "./config";
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { routes,routeComponents } from "./app.routers.module";
     RouterModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [Title,SetRouterTitleService, { provide: configMapToken, useValue: appConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

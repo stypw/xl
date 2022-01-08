@@ -1,34 +1,40 @@
-
-
-<div class="left" [class.close]="!isOpen">
-  <a class="menu-item fl-hor fl-left fl-ver-center" *ngFor="let m of menus;" [routerLink]="m.url"
-  routerLinkActive="actived">{{m.text}}</a>
-</div>
-
-<div class="header fl-hor fl-ver-center" style="color: #eee;padding-right: 5%;">
+<div class="header fl-hor fl-ver-center" style="color: #eee;padding-right:2%;">
   <div class="fl-hor fl-center fl-left" style="width: 270px;">
-    <div style="padding:0rem 1rem;" >
+    <div style="padding:0rem 1rem;">
 
-      <div xlMenuSwitch [(open)]="isOpen" style="width: 25px;height:25px;--color:white;--duration:300ms;cursor: pointer;" ></div>
+      <div xlMenuSwitch [(open)]="isOpen" class="menu-switch"></div>
     </div>
-    <h2>Xl</h2>
-    <h4>-轻量的Angular组件库</h4>
-    
+    <h2>{{title}}</h2>
+
   </div>
   <div class="fl-zoom-1 fl-hor fl-right fl-ver-center">
   </div>
-  <div class="fl-hor col-gap-10 ">
-    <a [routerLink]="['start']">介绍</a>
-    <a [routerLink]="['theme']">风格说明</a>
-    <a [routerLink]="['components']">组件库</a>
+  <div class="fl-hor col-gap-2 ">
+    <a style="text-decoration: none;color:white;" href="https://github.com/stypw/xl" target="__blank">
+      <span class="fl-hor fl-center">
+        <img style="width:22px;height:22px;" src="assets/images/github-circle-white-transparent.svg" />
+        <span>&nbsp;GitHub</span>
+      </span>
+    </a>
   </div>
- 
-
 </div>
-<div class="content">
+<div class="left fl-zoom-0" [class.open]="isOpen">
+  <a class="menu-item" *ngFor="let m of menus;" [routerLink]="m.url" routerLinkActive="actived">
+    <div *ngIf="m.icon" style="padding:5px;">
+      <div class="menu-icon" [xlSvg]="m.icon"></div>
+    </div>
 
+    <div class="menu-text-area">
+      <div class="menu-text-arrow"></div>
+      <div class="menu-text">{{m.text}}</div>
+    </div>
+
+  </a>
+</div>
+<div class="main">
   <router-outlet></router-outlet>
 </div>
+
 <div class="footer fl-hor fl-hor-between fl-ver-center">
   <a class="fl-hor fl-center" target="_blank"
     href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52010302002539">
@@ -38,12 +44,5 @@
 
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
     <ng-container>黔ICP备2021009832号-1</ng-container>
-  </a>
-
-  <a style="text-decoration: none;" href="https://github.com/stypw/xl" target="__blank">
-    <span class="fl-hor fl-center">
-      <img style="width:22px;height:22px;" src="assets/images/github-circle-white-transparent.svg" />
-      <span>&nbsp;GitHub</span>
-    </span>
   </a>
 </div>
