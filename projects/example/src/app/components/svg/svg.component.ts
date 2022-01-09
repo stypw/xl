@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { svgSet, PathData } from "@stypw/xl";
+import { svgSet, PathData,showToast } from "@stypw/xl";
 type K = keyof typeof svgSet;
 @Component({
   selector: 'div[router-svg]',
@@ -16,12 +16,18 @@ export class SvgComponent implements OnInit {
     const svgs: { k: string, d: PathData[] }[] = [];
     for (const svg in svgSet) {
       let d = svgSet[svg as K];
-
-      svgs.push({ k: svg, d });
+      let k = svg.replace("xl_svg_", "");
+      svgs.push({ k, d });
     }
     this.svgs = svgs.sort((a, b) => {
       return a.k.localeCompare(b.k) ? 1 : -1;
     });
+  }
+
+  async onItemClick(item: { k: string, d: PathData[] }) {
+     const ret = await navigator.clipboard.writeText(item.k);
+     console.log(ret);
+     showToast("复制完成");
   }
 
 }

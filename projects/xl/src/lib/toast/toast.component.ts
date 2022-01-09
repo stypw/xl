@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnDestroy } from "@angular/core";
 type ToastHandle = (txt: string) => void;
 export interface IXlToast {
     toast(txt: string): void;
@@ -56,8 +56,40 @@ export class XlToastComponent {
     set xlToast(handle: IXlToast | string | null | undefined) {
         if (handle instanceof XlToast) {
             handle.toastHandle = this.doToast.bind(this);
-        } else {
-            throw "toast error,call IXlToast.create to create one!";
+        }
+    }
+
+
+    registered: IXlToast | null = null;
+    registryToGlobal() {
+        let t = IXlToast.create();
+        this.xlToast = t;
+        toastRegister(t);
+        this.registered = t;
+    }
+
+    ngOnDestroy() {
+        if (this.registered && this.registered == toast) {
+            toastUnregister();
+        }
+    }
+
+    @Input()
+    set global(v: string) {
+        if (v == "") {
+            this.registryToGlobal();
+            return;
+        }
+        if (!v) return;
+        let val = v.toLowerCase();
+        if (val == "true" || val == "global") {
+            this.registryToGlobal();
+            return;
+        }
+        if (typeof v == "boolean") {
+            if (v) {
+                this.registryToGlobal();
+            }
         }
     }
 

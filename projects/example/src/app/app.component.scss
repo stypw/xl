@@ -2,15 +2,47 @@
 $headerHeight:3rem;
 $footerHeight:2rem;
 $leftWidth:4rem;
+
+
+
 :host{
    display: grid;
    grid-template-rows: $headerHeight 1fr $footerHeight;
    grid-template-columns: $leftWidth 1fr;
    grid-template-areas: 
-    "header header"
+    "log header"
     "left main"
     "left footer"
    ;
+}
+
+.log{
+    grid-area: log;
+    position: sticky;
+    top:0px;
+    background-color: rgb(10, 80, 110);
+    z-index: 99;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+@keyframes logIconAnimal{
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(360deg);
+    }
+}
+
+.log-icon{
+    animation: logIconAnimal 3000ms infinite linear;
+    width:26px;
+    height: 26px;
 }
 
 .header{
@@ -19,6 +51,7 @@ $leftWidth:4rem;
     top:0px;
     background-color: #1976d2;
     box-shadow: 1px 1px 6px 1px #1976d260;
+    padding-left: 1rem;
     z-index: 99;
 }
 
@@ -31,8 +64,9 @@ $leftWidth:4rem;
 .left{
     grid-area: left;
     padding-top: 1rem;
-
-    background-color: rgb(250, 250, 250);
+    --color:white;
+    background-color: rgb(9, 107, 153);
+    
     box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.1);
     transition: width 300ms;
    
@@ -63,7 +97,7 @@ $leftWidth:4rem;
     align-items: center;
     align-content: center;
 
-    border-top: 1px solid rgba(63, 81, 181, 0.048); 
+    border-top: 1px solid #ffffff10; 
     position: relative;
     overflow: visible;
     .menu-text-area{
@@ -97,7 +131,9 @@ $leftWidth:4rem;
             align-items: center;
             align-content: center;
             height: 2rem;
-            width:4rem;
+            width:auto;
+            white-space: nowrap;
+            padding:0rem 1rem;
             background-color: rgba(47, 189, 233,1);
             color:white;
             border-radius: 2px;
@@ -114,15 +150,23 @@ $leftWidth:4rem;
         }
     }
     .menu-icon{
-        width: 1.3rem;
-        height: 1.3rem;
+        width: 1.2rem;
+        height: 1.2rem;
     }
 
     &.actived{
      
        position: relative;
-       --color:white;
-       background-color: rgb(0, 174, 255);
+       background-color: rgba(72, 146, 180, 0.7);
+        &::before{
+            content: '';
+            position: absolute;
+            top:1px;
+            bottom:1px;
+            left:1px;
+            width: 2px;
+            background-color: white;
+        }
     } 
 }
 
@@ -135,36 +179,57 @@ $leftWidth:4rem;
     cursor: pointer;
     display: none;
 }
+:host-context(.xl-sk-sm,.xl-sk-xs){
+    display: grid;
+    grid-template-rows: $headerHeight 1fr $footerHeight;
+    grid-template-columns:$leftWidth 1fr;
+    grid-template-areas: 
+    "log header"
+    "main main"
+    "footer footer"
+    ;
 
-@media screen and (max-width: 764px) {
-    :host{
-        display: grid;
-        grid-template-rows: $headerHeight 1fr $footerHeight;
-        grid-template-columns: 1fr;
-        grid-template-areas: 
-        "header"
-        "main"
-        "footer"
-        ;
+    .log{
+        background-color:#1976d2;
     }
+    .log-icon{
+        display: none;
+    }
+
     .menu-switch{
         display: block;
     }
+  
     .left{
         position: fixed;
+        z-index: 999;
         grid-area: none;
         top:$headerHeight;
         right:0px;
         left:0px;
         bottom:0px;
-        
+        overscroll-behavior: contain;
+        -ms-scroll-chaining: contain;
         pointer-events: none;
         transform: scaleX(0);
         transform-origin: top left;
         transition:  transform 300ms;
         &.open{
-            pointer-events: none;
+            pointer-events: all;
             transform: scale(1);
         }
     }
+    
+    
+}
+
+
+.toast{
+    position: fixed;
+    left:$leftWidth;
+    top:$headerHeight;
+    right:0px;
+    bottom:$footerHeight;
+    pointer-events: none;
+    font-size: 0.6rem;
 }

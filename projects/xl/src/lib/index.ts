@@ -26,6 +26,8 @@ export * from "./repeat";
 export * from "./recursion";
 export * from "./table";
 export * from "./menu-switch";
+export * from "./media";
+import { XlMediaModule } from "./media";
 import { XlMenuSwitchModule } from "./menu-switch";
 import { XlTableModule } from "./table";
 import { XlRecursionModule } from "./recursion";
@@ -51,6 +53,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlMediaModule,
     XlMenuSwitchModule,
     XlTableModule,
     XlRecursionModule,

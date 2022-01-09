@@ -1,0 +1,33 @@
+:host{
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-areas: "content anchor";
+}
+
+.content-area{
+    grid-area: content;
+}
+.anchor-area{
+    grid-area: anchor;
+}
+
+:host-context(.xl-sk-sm,.xl-sk-xs){
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+
+    .content-area{
+        grid-area: content;
+    }
+    .anchor-area{
+       position: fixed;
+       top:64px;
+       right:0px;
+       bottom:0px;
+       overflow: hidden;
+       width:0px;
+
+       &.open{
+           width:200px;
+       }
+    }
+}

@@ -6,9 +6,27 @@
     align-content: flex-start;
     padding:20px;
 }
-
+.icon-text{
+    font-size: 0.6rem;
+    max-width: 100%;
+    padding:0.2rem 0rem;
+    cursor: default;
+}
 .svg-item{
     width: 100px;
     height: 100px;
     padding:10px;
+}
+
+:host-context(.xl-sk-lg){
+    --color:red;
+}
+:host-context(.xl-sk-md){
+    --color:green;
+}
+:host-context(.xl-sk-sm){
+    --color:blue;
+}
+:host-context(.xl-sk-xs){
+    --color:yellow;
 }
