@@ -1,27 +1,49 @@
-<ng-template #defaultHeader let-header let-idx="index" let-od="odd" let-ev="even" let-fst="first" let-lst="last">
-    <div class="header-item" [class.first]="fst">{{header.text}}</div>
+<ng-template #defaultHeader let-header let-headerIndex="headerIndex">
+    <div>{{header.text}}</div>
 </ng-template>
-<ng-template #defaultCell let-cell let-h="header" let-ridx="rindex" let-rod="rodd" let-rev="reven" let-rfst="rfirst"
-    let-rlst="rlast" let-cidx="cindex" let-cod="codd" let-cev="ceven" let-cfst="cfirst" let-clst="clast">
-    <div class="cell" [style.justify-content]="h.align || 'center'" [class.first-row]="rfst" [class.first]="cfst">{{cell[h.key]}}</div>
+<ng-template #defaultCell let-row let-header="header" let-rowIndex="rowIndex" let-headerIndex="headerIndex">
+    <div [style.justify-content]="header.align || 'center'">{{row[header.key]}}</div>
 </ng-template>
-<div class="table" [style.grid-template-columns]="templateColumns" *ngIf="headers && headers.length">
+<div class="table" [style.--columns]="templateColumns" *ngIf="headers && headers.length">
 
-    <ng-container *ngFor="let h of headers;let idx=index;let od = odd;let ev = even;let fst = first;let lst = last;">
-        <ng-container
-            *ngTemplateOutlet="headerTemplate || defaultHeader; context: {$implicit:h,index:idx,odd:od,even:ev,first:fst,last:lst};">
-        </ng-container>
+    <ng-container *ngFor="let header of headers;let headerIndex=index;">
+        <div class="header-item" [class.vital]="headerIndex | lt:2">
+            <ng-container *ngTemplateOutlet="headerTemplate || defaultHeader; context: {$implicit:header,headerIndex};">
+            </ng-container>
+        </div>
     </ng-container>
+    <div class="dots-stub"></div>
     <ng-container *ngIf="rows && rows.length">
 
-        <ng-container
-            *ngFor="let r of rows;let rindex=index;let rodd = odd;let reven = even;let rfirst = first;let rlast = last;">
-            <ng-container
-                *ngFor="let c of headers;let cindex=index;let codd = odd;let ceven = even;let cfirst = first;let clast = last;">
-                <ng-container
-                    *ngTemplateOutlet="cellTemplate || defaultCell; context: {$implicit:r,header:c,rindex,rodd,reven,rfirst,rlast,cindex,codd,ceven,cfirst,clast}">
-                </ng-container>
+        <ng-container *ngFor="let row of rows;let rowIndex=index;">
+            <ng-container *ngFor="let header of headers;let headerIndex=index;">
+                <div class="cell" [class.vital]="headerIndex | lt:2">
+                    <ng-container
+                        *ngTemplateOutlet="cellTemplate || defaultCell; context: {$implicit:row,header,rowIndex,headerIndex}">
+                    </ng-container>
+
+                </div>
             </ng-container>
+            <div class="dots">
+                <div (click)="showDetail=row;" [xlSvg]="moreIcon" style="width: 20px;height: 20px;"></div>
+            </div>
         </ng-container>
     </ng-container>
+</div>
+<div *ngIf="showDetail" (click)="showDetail=null;" class="row-detail">
+    <div class="detail-content" xlEventOnce (click)="detailContentCick();" >
+        <ng-container *ngFor="let header of headers;let headerIndex=index;">
+            <div class="detail-field" [class.vital]="headerIndex | lt:2">
+                <div class="detail-header" >
+                    <ng-container *ngTemplateOutlet="headerTemplate || defaultHeader; context: {$implicit:header,headerIndex};">
+                    </ng-container>
+                </div>
+                <div class="detail-cell" >
+                    <ng-container
+                        *ngTemplateOutlet="cellTemplate || defaultCell; context: {$implicit:showDetail,header,rowInde:0,headerIndex}">
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </div>
 </div>

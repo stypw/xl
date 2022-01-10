@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { svgSet } from "@stypw/xl";
 
 @Component({
   selector: 'div[anchor-page]',
@@ -12,4 +13,8 @@ export class AnchorPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  switchIcon = svgSet.xl_svg_mulu;
+  toTopIcon=svgSet.xl_svg_ico_to_top;
+
+  showAnchor=false;
 }

@@ -18,15 +18,15 @@
     padding:10px;
 }
 
-:host-context(.xl-sk-lg){
+:host-context(body.xl-sk-lg){
     --color:red;
 }
-:host-context(.xl-sk-md){
+:host-context(body.xl-sk-md){
     --color:green;
 }
-:host-context(.xl-sk-sm){
+:host-context(body.xl-sk-sm){
     --color:blue;
 }
-:host-context(.xl-sk-xs){
-    --color:yellow;
+:host-context(body.xl-sk-xs){
+    --color:yellowgreen;
 }

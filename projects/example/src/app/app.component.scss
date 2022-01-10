@@ -1,13 +1,12 @@
 
 $headerHeight:3rem;
-$footerHeight:2rem;
 $leftWidth:4rem;
 
 
 
 :host{
    display: grid;
-   grid-template-rows: $headerHeight 1fr $footerHeight;
+   grid-template-rows: $headerHeight 1fr auto;
    grid-template-columns: $leftWidth 1fr;
    grid-template-areas: 
     "log header"
@@ -57,8 +56,8 @@ $leftWidth:4rem;
 
 .main{
     padding:1rem;
-   grid-area: main;
-   min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
+    grid-area: main;
+    margin:0px;
 }
 
 .left{
@@ -66,19 +65,24 @@ $leftWidth:4rem;
     padding-top: 1rem;
     --color:white;
     background-color: rgb(9, 107, 153);
-    
+    min-height: calc(100vh - #{$headerHeight});
     box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.1);
     transition: width 300ms;
-   
-    overflow: visible;
 }
 
 .footer{
     grid-area: footer;
-    background-color: rgba(51, 51, 51, 0.055);
-    padding-left:10%;
-    padding-right: 10%;
+    background-color: rgba(51, 51, 51, 0.89);
+    padding:10px 10%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
     a{
+        padding:5px 0px;
         text-decoration: none;
         color:rgb(47, 189, 233);
         &:hover{
@@ -99,12 +103,10 @@ $leftWidth:4rem;
 
     border-top: 1px solid #ffffff10; 
     position: relative;
-    overflow: visible;
     .menu-text-area{
         position: absolute;
         top:0px;
         bottom:0px;
-        width:6rem;
         left:100%;
         background-color: transparent;
         display: flex;
@@ -179,9 +181,22 @@ $leftWidth:4rem;
     cursor: pointer;
     display: none;
 }
+
+.mask{
+    z-index: 998;
+    pointer-events: none;
+    opacity: 0;
+    position: fixed;
+    top:$headerHeight;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    background-color: rgba(0,0,0,0.3);
+}
+
 :host-context(.xl-sk-sm,.xl-sk-xs){
     display: grid;
-    grid-template-rows: $headerHeight 1fr $footerHeight;
+    grid-template-rows: $headerHeight 1fr auto;
     grid-template-columns:$leftWidth 1fr;
     grid-template-areas: 
     "log header"
@@ -205,20 +220,91 @@ $leftWidth:4rem;
         z-index: 999;
         grid-area: none;
         top:$headerHeight;
-        right:0px;
-        left:0px;
+        left:-50vw;
         bottom:0px;
+        width:50vw;
         overscroll-behavior: contain;
         -ms-scroll-chaining: contain;
         pointer-events: none;
-        transform: scaleX(0);
-        transform-origin: top left;
-        transition:  transform 300ms;
+        overflow-y: auto;
+        transition:left 300ms;
+        box-shadow: none;
         &.open{
             pointer-events: all;
-            transform: scale(1);
+            left:0vw;
         }
     }
+    .mask{
+        transition: opacity 300ms;
+        &.open{
+            pointer-events: all;
+            opacity: 1;
+        }
+    }
+
+    .menu-item{
+        width:100%;
+        height: 3rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    
+        border-top: 1px solid #ffffff10; 
+        position: relative;
+        padding-left: 1rem;
+        .menu-text-area{
+            position:static;
+            background-color: transparent;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+            opacity: 1;
+            pointer-events: none;
+            .menu-icon{
+                width:auto;
+            }
+            .menu-text-arrow{
+                box-sizing: border-box;
+                width:0px;
+                height: 0px;
+                border-left: 0.6rem solid transparent;
+                border-top: 0.4rem solid transparent;
+                border-right: 0.6rem solid rgba(47, 190, 233, 1);
+                border-bottom: 0.4rem solid transparent;
+                display: none;
+            }
+    
+            .menu-text{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                height: 2rem;
+                width:auto;
+                white-space: nowrap;
+                padding:0rem 1rem;
+                background-color: transparent;
+                color:white;
+                border-radius: 2px;
+            }
+        }
+    }
+
+    .footer{
+        padding-left:10%;
+        padding-right: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    
     
     
 }
@@ -229,7 +315,6 @@ $leftWidth:4rem;
     left:$leftWidth;
     top:$headerHeight;
     right:0px;
-    bottom:$footerHeight;
     pointer-events: none;
     font-size: 0.6rem;
 }

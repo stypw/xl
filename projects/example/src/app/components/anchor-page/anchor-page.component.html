@@ -1,8 +1,10 @@
-<div class="fl-hor" style="padding: 20px;column-gap: 20px;">
-    <div class="fl-zoom-1 content-area">
-        <ng-content select="[content-area]" ></ng-content>
-    </div>
-    <div class="fl-zoom-0 fl-ver anchor-area">
-        <ng-content select="[anchor-area]" ></ng-content>
-    </div>
+<div class="content-area" >
+    <ng-content select="[content-area]"></ng-content>
 </div>
+<div class="anchor-area" [class.open]="showAnchor" >
+    <ng-content select="[anchor-area]"></ng-content>
+</div>
+
+<div class="totop" [xlSvg]="toTopIcon"></div>
+<div class="anchor-switch" [xlSvg]="switchIcon" (click)="showAnchor = !showAnchor;"  ></div>
+<div class="mask" [class.open]="showAnchor" (click)="showAnchor = false;" ></div>

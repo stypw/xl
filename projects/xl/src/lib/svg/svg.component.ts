@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PathData } from "./define";
+// import { PathData } from "@stypw/xl/pathes";
 @Component({
   selector: '[xlSvg]',
   templateUrl: './svg.component.html',
@@ -8,9 +8,9 @@ import { PathData } from "./define";
 export class SvgComponent {
 
 
-  pathes: PathData[] | null = null;
+  pathes: any[] | null = null;
   @Input()
-  public set xlSvg(icon: PathData[]) {
+  public set xlSvg(icon: any[]) {
     this.pathes = icon;
   }
 }

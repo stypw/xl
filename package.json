@@ -5,10 +5,13 @@
     "ng": "ng",
     "dev:xl": "ng b xl --watch",
     "dev:example": "ng s example",
+    "b:xl":"ng b xl",
+    "b:example":"ng b example",
     "build": "ng b xl && ng b example",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "builders":"builder.json",
   "type": "commonjs",
   "private": true,
   "dependencies": {

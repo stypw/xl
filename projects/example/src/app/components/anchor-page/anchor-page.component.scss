@@ -1,7 +1,9 @@
 :host{
     display: grid;
-    grid-template-columns: 1fr 200px;
-    grid-template-areas: "content anchor";
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "content anchor"
+    "content other"
+    ;
 }
 
 .content-area{
@@ -9,6 +11,50 @@
 }
 .anchor-area{
     grid-area: anchor;
+    position: sticky;
+    top:100px;
+    right:0px;
+    padding-left: 1rem;
+    padding-top:1rem;
+}
+
+.anchor-switch{
+    position: fixed;
+    bottom:110px;
+    right:18px;
+    width:32px;
+    height: 32px;
+    background-color: white;
+    box-shadow: 1px 1px 6px 1px #ccc6;
+    padding:2px;
+    border-radius: 2px;
+    --color:#ccc;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.mask{
+    position: fixed;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    
+}
+
+.totop{
+    position: fixed;
+    bottom:60px;
+    right:18px;
+    width:32px;
+    height: 32px;
+    background-color: white;
+    box-shadow: 1px 1px 6px 1px #ccc6;
+    padding:2px;
+    border-radius: 2px;
+    --color:#ccc;
 }
 
 :host-context(.xl-sk-sm,.xl-sk-xs){
@@ -18,16 +64,39 @@
     .content-area{
         grid-area: content;
     }
-    .anchor-area{
-       position: fixed;
-       top:64px;
-       right:0px;
-       bottom:0px;
-       overflow: hidden;
-       width:0px;
-
-       &.open{
-           width:200px;
-       }
+    .mask{
+        display: block;
+        pointer-events: none;
+        opacity: 0;
+        z-index: 98;
+        transition: opacity 300ms;
+        &.open{
+            opacity: 1;
+            pointer-events: all;
+        }
     }
+    .anchor-area{
+        position: fixed;
+        top:3rem;
+        right:-200px;
+        bottom:0px;
+        overflow: hidden;
+        width:200px;
+        pointer-events: none;
+        background-color: white;
+        z-index: 99;
+        transition: right 300ms;
+        transform-origin: right center;
+        overflow-y: auto;
+        &.open{
+            right:0px;
+            pointer-events: all;
+        }
+    }
+    .anchor-switch{
+        pointer-events: all;
+        opacity: 1;
+    }
+
+
 }

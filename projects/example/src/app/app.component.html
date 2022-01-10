@@ -1,52 +1,50 @@
+<div class="log">
+  <div class="log-icon" [xlSvg]="logIcon"></div>
+  <div xlMenuSwitch [(open)]="isOpen" class="menu-switch"></div>
+</div>
+<div class="header fl-hor fl-ver-center" style="color: #eee;padding-right:2%;">
+  <div class="fl-hor fl-center fl-left">
+    <h2 style="font-size: 1rem;">{{title}}</h2>
+  </div>
+  <div class="fl-zoom-1"></div>
+  <div class="fl-hor col-gap-2 ">
+    <a style="text-decoration: none;color:white;" href="https://github.com/stypw/xl" target="__blank">
+      <span class="fl-hor fl-center">
+        <img style="width:1.2rem;height:1.2rem;" src="assets/images/github-circle-white-transparent.svg" />
+        <span style="font-size: 0.8rem;">&nbsp;GitHub</span>
+      </span>
+    </a>
+  </div>
+</div>
+<div class="left " [class.open]="isOpen">
+  <a class="menu-item" *ngFor="let m of menus;" [routerLink]="m.url" routerLinkActive="actived">
+    <div *ngIf="m.icon" style="padding:5px;">
+      <div class="menu-icon" [xlSvg]="m.icon"></div>
+    </div>
 
-  <div class="log" >
-    <div class="log-icon" [xlSvg]="logIcon"  ></div>
-    <div xlMenuSwitch [(open)]="isOpen" class="menu-switch"></div>
-  </div>
-  <div class="header fl-hor fl-ver-center" style="color: #eee;padding-right:2%;">
-    <div class="fl-hor fl-center fl-left" style="width: 15rem;">
-     
-      <h2 style="font-size: 1rem;">{{title}}</h2>
-  
+    <div class="menu-text-area">
+      <div class="menu-text-arrow"></div>
+      <div class="menu-text">{{m.text}}</div>
     </div>
-    <div class="fl-zoom-1 fl-hor fl-right fl-ver-center">
-    </div>
-    <div class="fl-hor col-gap-2 ">
-      <a style="text-decoration: none;color:white;" href="https://github.com/stypw/xl" target="__blank">
-        <span class="fl-hor fl-center">
-          <img style="width:1.2rem;height:1.2rem;" src="assets/images/github-circle-white-transparent.svg" />
-          <span style="font-size: 0.8rem;">&nbsp;GitHub</span>
-        </span>
-      </a>
-    </div>
-  </div>
-  <div class="left fl-zoom-0" [class.open]="isOpen">
-    <a class="menu-item" *ngFor="let m of menus;" [routerLink]="m.url" routerLinkActive="actived">
-      <div *ngIf="m.icon" style="padding:5px;">
-        <div class="menu-icon" [xlSvg]="m.icon"></div>
-      </div>
-  
-      <div class="menu-text-area">
-        <div class="menu-text-arrow"></div>
-        <div class="menu-text">{{m.text}}</div>
-      </div>
-  
-    </a>
-  </div>
-  <div class="main">
-    <router-outlet></router-outlet>
-  </div>
-  
-  <div class="footer fl-hor fl-hor-between fl-ver-center">
-    <a class="fl-hor fl-center" target="_blank"
-      href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52010302002539">
-      <img src="assets/images/beian.png" />
-      <span>贵公网安备 52010302002539号</span>
-    </a>
-  
-    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
-      <ng-container>黔ICP备2021009832号-1</ng-container>
-    </a>
-  </div>
-  
-  <div xlToast class="toast" global></div>
+
+  </a>
+</div>
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="footer">
+  <a class="fl-hor fl-center" target="_blank"
+    href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52010302002539">
+    <img src="assets/images/beian.png" />
+    <span>贵公网安备 52010302002539号</span>
+  </a>
+
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+    <ng-container>黔ICP备2021009832号-1</ng-container>
+  </a>
+</div>
+
+<div class="mask" [class.open]="isOpen" (click)="isOpen = false;"></div>
+
+<div xlToast class="toast" global></div>

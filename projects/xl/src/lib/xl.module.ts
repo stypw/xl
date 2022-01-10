@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 export * from "./config";
 export * from "./types/types";
-export * from "./http"
 export * as tools from "./tools";
 export * as mysql from "./mysql"
 export * from "./binding";
@@ -27,6 +26,9 @@ export * from "./recursion";
 export * from "./table";
 export * from "./menu-switch";
 export * from "./media";
+export * from "./event-once";
+
+import {  XlEventOnceModule  } from "./event-once"; 
 import { XlMediaModule } from "./media";
 import { XlMenuSwitchModule } from "./menu-switch";
 import { XlTableModule } from "./table";
@@ -53,6 +55,7 @@ import { XlBindingModule } from "./binding";
 
 
 const modules = [
+    XlEventOnceModule,
     XlMediaModule,
     XlMenuSwitchModule,
     XlTableModule,
