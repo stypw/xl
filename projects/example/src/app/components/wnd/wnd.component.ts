@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { tools } from "@stypw/xl"
+import { sleep } from "@stypw/xl/core"
 @Component({
     selector: "div[example-wnd]",
     templateUrl: "./wnd.component.html",
@@ -8,7 +8,7 @@ import { tools } from "@stypw/xl"
 export class WndComponent {
     wndShow = false;
     async ngOnInit() {
-        await tools.sleep(5000);
+        await sleep(5000);
         this.wndShow = true;
 
     

@@ -14,6 +14,7 @@
           "options": {
             "project": "projects/xl/ng-package.json"
           },
+          
           "configurations": {
             "production": {
               "tsConfig": "projects/xl/tsconfig.lib.prod.json"

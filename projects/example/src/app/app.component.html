@@ -5,6 +5,17 @@
 <div class="header fl-hor fl-ver-center" style="color: #eee;padding-right:2%;">
   <div class="fl-hor fl-center fl-left">
     <h2 style="font-size: 1rem;">{{title}}</h2>
+
+    <ng-template #small>
+      <div>Hello Small</div>
+    </ng-template>
+    <ng-template #other>
+      <p>Hell Other!</p>
+    </ng-template>
+    <button (click)="showTest = !showTest">changeTest</button>
+    <ng-container *ngIf="showTest">
+      <ng-container *xlSmallMedia="small other other;"></ng-container>
+    </ng-container>
   </div>
   <div class="fl-zoom-1"></div>
   <div class="fl-hor col-gap-2 ">
@@ -32,7 +43,6 @@
 <div class="main">
   <router-outlet></router-outlet>
 </div>
-
 <div class="footer">
   <a class="fl-hor fl-center" target="_blank"
     href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52010302002539">
@@ -44,6 +54,8 @@
     <ng-container>黔ICP备2021009832号-1</ng-container>
   </a>
 </div>
+
+
 
 <div class="mask" [class.open]="isOpen" (click)="isOpen = false;"></div>
 

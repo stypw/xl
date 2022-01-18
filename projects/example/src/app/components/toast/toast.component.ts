@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IXlToast,XlToastComponent } from "@stypw/xl";
+import { IXlToast,XlToastComponent } from "@stypw/xl/ui";
 
 @Component({
     selector: "div[router-toast]",

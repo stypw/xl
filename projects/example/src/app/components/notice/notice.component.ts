@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IXlNotice } from '@stypw/xl';
+import { IXlNotice } from '@stypw/xl/ui';
 
 @Component({
   selector: 'div[router-notice]',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { svgSet, PathData,showToast } from "@stypw/xl";
-type K = keyof typeof svgSet;
+import { showToast } from "@stypw/xl/ui";
+import {PathData } from "@stypw/xl/core";
+import { allPathes } from "@stypw/xl/data";
 @Component({
   selector: 'div[router-svg]',
   templateUrl: './svg.component.html',
@@ -14,8 +15,8 @@ export class SvgComponent implements OnInit {
 
   ngOnInit(): void {
     const svgs: { k: string, d: PathData[] }[] = [];
-    for (const svg in svgSet) {
-      let d = svgSet[svg as K];
+    for (const svg in allPathes) {
+      let d = allPathes[svg];
       let k = svg.replace("xl_svg_", "");
       svgs.push({ k, d });
     }

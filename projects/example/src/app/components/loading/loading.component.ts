@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IXlLoading } from "@stypw/xl";
+import { IXlLoading } from "@stypw/xl/ui";
 
 @Component({
     selector: "div[router-loading]",

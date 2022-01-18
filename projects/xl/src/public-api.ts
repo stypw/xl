@@ -1,1 +1,1 @@
-export * from "./lib/xl.module";
+export const sign = "xl";

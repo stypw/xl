@@ -31,6 +31,12 @@
       "@stypw/xl/*": [
         "dist/xl/xl/*",
         "dist/xl/*"
+      ],
+      "@env": [
+        "projects/example/src/app/env"
+      ],
+      "@env/*": [
+        "projects/example/src/app/env/*"
       ]
     }
   },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeNode } from "@stypw/xl";
+import { TreeNode } from "@stypw/xl/ui";
 @Component({
   selector: 'div[router-tree]',
   templateUrl: './tree.component.html',

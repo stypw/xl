@@ -1,0 +1,206 @@
+$mainColor:white;
+$headerHeight:60px;
+$leftWidth:60px;
+$footerHeight:60px;
+
+
+:host{
+   display: grid;
+   grid-template-rows: $headerHeight 1fr auto;
+   grid-template-columns: $leftWidth 1fr;
+   grid-template-areas: 
+    "log header"
+    "left main"
+    "left footer"
+   ;
+}
+
+.log{
+    grid-area: log;
+    position: sticky;
+    top:0px;
+    background-color: rgb(10, 80, 110);
+    z-index: 99;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+@keyframes logIconAnimal{
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(360deg);
+    }
+}
+
+.log-icon{
+    animation: logIconAnimal 3000ms infinite linear;
+    width:26px;
+    height: 26px;
+}
+
+.header{
+    grid-area: header;
+    position: sticky;
+    top:0px;
+    background-color: #1976d2;
+    box-shadow: 1px 1px 6px 1px #1976d260;
+    padding-left: 1rem;
+    z-index: 99;
+}
+
+.main{
+    padding:1rem;
+    grid-area: main;
+    margin:0px;
+}
+
+.left{
+    grid-area: left;
+    padding-top: 1rem;
+    --color:white;
+    background-color: rgb(9, 107, 153);
+    min-height: calc(100vh - #{$headerHeight});
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.1);
+    transition: width 300ms;
+}
+
+.footer{
+    grid-area: footer;
+    background-color: rgba(51, 51, 51, 0.89);
+    padding:10px 10%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+    a{
+        padding:5px 0px;
+        text-decoration: none;
+        color:rgb(47, 189, 233);
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
+
+.menu-item{
+    width:100%;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    border-top: 1px solid #ffffff10; 
+    position: relative;
+    .menu-text-area{
+        position: absolute;
+        top:0px;
+        bottom:0px;
+        left:100%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        opacity: 0;
+        pointer-events: none;
+        .menu-text-arrow{
+            box-sizing: border-box;
+            width:0px;
+            height: 0px;
+            border-left: 0.6rem solid transparent;
+            border-top: 0.4rem solid transparent;
+            border-right: 0.6rem solid rgba(47, 190, 233, 1);
+            border-bottom: 0.4rem solid transparent;
+        }
+
+        .menu-text{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            height: 2rem;
+            width:auto;
+            white-space: nowrap;
+            padding:0rem 1rem;
+            background-color: rgba(47, 189, 233,1);
+            color:white;
+            border-radius: 2px;
+        }
+    }
+
+    
+
+    &:hover{
+        background-color: rgba(63, 81, 181, 0.048);
+        .menu-text-area{
+            pointer-events: all;
+            opacity: 1;
+        }
+    }
+    .menu-icon{
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    &.actived{
+     
+       position: relative;
+       background-color: rgba(72, 146, 180, 0.7);
+        &::before{
+            content: '';
+            position: absolute;
+            top:1px;
+            bottom:1px;
+            left:1px;
+            width: 2px;
+            background-color: white;
+        }
+    } 
+}
+
+
+.menu-switch{
+    width: 1.2rem;
+    height:1.2rem;
+    --color:white;
+    --duration:300ms;
+    cursor: pointer;
+    display: none;
+}
+
+.mask{
+    z-index: 998;
+    pointer-events: none;
+    opacity: 0;
+    position: fixed;
+    top:$headerHeight;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    background-color: rgba(0,0,0,0.3);
+}
+
+
+
+.toast{
+    position: fixed;
+    left:$leftWidth;
+    top:$headerHeight;
+    right:0px;
+    pointer-events: none;
+    font-size: 0.6rem;
+}

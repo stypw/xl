@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { XlTableHeader,XlTableRow } from "@stypw/xl";
+import { XlTableHeader,XlTableRow } from "@stypw/xl/ui";
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',

@@ -16,11 +16,13 @@ import { TreeComponent } from "./components/tree/tree.component";
 import { WndComponent } from "./components/wnd/wnd.component";
 import { XlformComponent } from "./components/xlform/xlform.component";
 import { AnchorComponent } from "./components/anchor/anchor.component";
+import { StartComponent } from "./components/start/start.component";
 import { Inject, Injectable } from "@angular/core";
 import { Title } from "@angular/platform-browser";
-import { configMapToken } from "@stypw/xl";
+import { title } from "@env";
 
 export const routeComponents = [
+    StartComponent,
     AnchorComponent,
     CarouselComponent,
     ColorpickerComponent,
@@ -46,19 +48,15 @@ export class SetRouterTitleService implements CanActivate {
         route: ActivatedRouteSnapshot
     ) {
         let t = route.data["title"];
-        if (t) {
-            let title = this.map.get("title");
-            if (title) {
-                this.titleService.setTitle(`${title}-${t}`)
-            }
-        }
+        this.titleService.setTitle(`${title}-${t || ''}`);
         return true;
     }
-    constructor(private titleService: Title, @Inject(configMapToken) private map: Map<string, string>) { }
+    constructor(private titleService: Title) { }
 }
 
 export const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "start" },
+    { path: "start", component: StartComponent, canActivate: [SetRouterTitleService], data: { title: "开始" } },
     { path: "wnd", component: WndComponent, canActivate: [SetRouterTitleService], data: { title: "弹窗" } },
     { path: "loading", component: LoadingComponent, canActivate: [SetRouterTitleService], data: { title: "加载" } },
     { path: "toast", component: ToastComponent, canActivate: [SetRouterTitleService], data: { title: "提示" } },
